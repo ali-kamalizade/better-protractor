@@ -1,8 +1,8 @@
 import {} from "protractor"; // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
-import {EndToEndTestingServiceInterface} from "../js/end_to_end_testing.service";
+import {EndToEndTestingServiceInterface} from "../js";
 import {Key} from "selenium-webdriver";
 
-const UtilityService = require("../js/main.js");
+const UtilityService = require("../js/index.js");
 const service: EndToEndTestingServiceInterface = new UtilityService();
 
 describe('Google', () => {

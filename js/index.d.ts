@@ -1,4 +1,3 @@
-
 import {WebdriverWebElement} from "protractor/built/element";
 import {ElementFinder} from "protractor";
 import {IWebDriverOptionsCookie, WebElement} from "selenium-webdriver";
