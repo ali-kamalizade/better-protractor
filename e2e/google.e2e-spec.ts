@@ -5,7 +5,6 @@ import {Key} from "selenium-webdriver";
 const UtilityService = require("../js/main.js");
 const service: EndToEndTestingServiceInterface = new UtilityService();
 
-//TODO perform actual user and password update
 describe('Google', () => {
 	it('should look for sedeo', async () => {
 		service.disableAngular();

@@ -6,3 +6,4 @@
 /dist/out-tsc/*
 *.js.map
 *.service.js
+/out-tsc

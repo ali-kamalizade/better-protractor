@@ -33,7 +33,7 @@ export interface EndToEndTestingServiceInterface {
 	waitForBrowser(): any;
 	/**
 	 * Disable Angular (for non-Angular pages or if you encounter problems with Angular lifecycle)
-	 * @return {promise.Promise<boolean> | *}
+	 * @return {promise.Promise<boolean>}
 	 */
 	disableAngular(): any;
 	/**

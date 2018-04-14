@@ -17,8 +17,7 @@
 			"dom"
 		],
 		"module": "commonjs",
-		"removeComments": false,
-		"noImplicitAny": false
+		"removeComments": false
 	},
 	"exclude": [
 		"node_modules"

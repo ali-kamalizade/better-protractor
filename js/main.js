@@ -307,7 +307,7 @@ class EndToEndTestingService {
 	};
 	/**
 	 * Disable Angular (for non-Angular pages or if you encounter problems with Angular lifecycle)
-	 * @return {promise.Promise<boolean> | *}
+	 * @return {promise.Promise<boolean>}
 	 */
 	disableAngular() {
 		return browser.waitForAngularEnabled(false);

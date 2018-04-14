@@ -3,7 +3,7 @@ const e2e = require("../js/main.js");
 const service = new e2e();
 
 describe('Mobiflip', () => {
-	it('should go to first article', async() => {
+	it('should open first article', async() => {
 		service.disableAngular();
 		service.navigateToRoute('https://mobiflip.de');
 		service.pauseBrowserTemporarily(500);
