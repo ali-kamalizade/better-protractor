@@ -2,13 +2,12 @@ require("protractor"); // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPE
 /**
  * Provides helper methods which allow for testing common test cases.
  * @see Page Object in Selenium
- * @type BetterProtractorService - If you add a new method here, please add the method signature there
+ * @type BetterProtractorService - If you add a new method here, please add the method signature in index.d.ts!
  */
 class BetterProtractorService {
 
 	constructor(isDisabled = false){
 		if (isDisabled) {
-			console.log("disabling");
 			this.disableAngular();
 		}
 	}
