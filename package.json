@@ -1,0 +1,29 @@
+{
+	"name": "protractor-helper",
+	"version": "1.0.0",
+	"description": "A library to use Protractor to the fullest",
+	"main": "js/main.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node main.js"
+	},
+	"keywords": [
+		"Protractor",
+		"E2E",
+		"end to end",
+		"Testing"
+	],
+	"dependencies": {},
+	"devDependencies": {
+		"@types/core-js": "^0.9.46",
+		"@types/jasmine": "^2.8.6",
+		"@types/node": "^7.0.55",
+		"jasmine-core": "^2.99.1",
+		"jasmine-spec-reporter": "^4.2.1",
+		"protractor": "^5.3.1",
+		"ts-node": "^3.3.0",
+		"typescript": "^2.8.1"
+	},
+	"author": "Ali Kamalizade",
+	"license": "MIT"
+}
