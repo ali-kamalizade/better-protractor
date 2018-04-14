@@ -2,9 +2,9 @@ require("protractor"); // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPE
 /**
  * Provides helper methods which allow for testing common test cases.
  * @see Page Object in Selenium
- * @type EndToEndTestingServiceInterface - If you add a new method here, please add the method signature there
+ * @type BetterProtractorService - If you add a new method here, please add the method signature there
  */
-class EndToEndTestingService {
+class BetterProtractorService {
 
 	constructor(isDisabled = false){
 		if (isDisabled) {
@@ -313,4 +313,4 @@ class EndToEndTestingService {
 		return browser.waitForAngularEnabled(false);
 	};
 }
-module.exports = EndToEndTestingService;
+module.exports = BetterProtractorService;

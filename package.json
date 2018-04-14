@@ -28,5 +28,6 @@
 	"license": "MIT",
 	"engines": {
 		"node": ">=7.6.0"
-	}
+	},
+	"bugs": "https://github.com/ali-kamalizade/protractor-helper/issues"
 }

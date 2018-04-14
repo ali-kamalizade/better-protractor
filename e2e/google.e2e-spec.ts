@@ -1,9 +1,9 @@
 import {} from "protractor"; // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
-import {EndToEndTestingServiceInterface} from "../js";
+import {BetterProtractorService} from "../index";
 import {Key} from "selenium-webdriver";
 
-const UtilityService = require("../js/index.js");
-const service: EndToEndTestingServiceInterface = new UtilityService();
+const UtilityService = require("../index.js");
+const service: BetterProtractorService = new UtilityService();
 
 describe('Google', () => {
 	it('should look for sedeo', async () => {

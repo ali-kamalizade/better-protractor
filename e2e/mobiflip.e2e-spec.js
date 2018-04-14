@@ -1,5 +1,5 @@
 const protractor = require("protractor"); // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
-const e2e = require("../js/index.js");
+const e2e = require("../index.js");
 const service = new e2e();
 
 describe('Mobiflip', () => {
