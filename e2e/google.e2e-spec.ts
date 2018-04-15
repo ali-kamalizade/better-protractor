@@ -3,11 +3,10 @@ import {BetterProtractorService} from "../index";
 import {Key} from "selenium-webdriver";
 
 const UtilityService = require("../index.js");
-const service: BetterProtractorService = new UtilityService();
+const service: BetterProtractorService = new UtilityService(false);
 
 describe('Google', () => {
 	it('should look for sedeo', async () => {
-		service.disableAngular();
 		service.navigateToRoute('https://google.de');
 		service.pauseBrowserTemporarily(500);
 		expect(await service.checkIfRouteContains('google', await service.getUrl())).toBe(true);

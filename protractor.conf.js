@@ -36,7 +36,7 @@ exports.config = {
 		jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
 		const UtilityService = require('./index.js');
 		const service = new UtilityService();
-		// for better testing: disable Angular and maximize window
+		// for better testing: disable Angular on non-Angular page and maximize window
 		service.disableAngular();
 		service.maximizeWindow();
 		service.navigateToRoute(baseUrl);
