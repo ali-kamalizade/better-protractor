@@ -16,7 +16,9 @@
 		"Node.js",
 		"Typescript",
 		"Javascript",
-		"NPM"
+		"NPM",
+		"Angular.JS",
+		"spec"
 	],
 	"dependencies": {},
 	"devDependencies": {
