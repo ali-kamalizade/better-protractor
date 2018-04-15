@@ -26,12 +26,12 @@
 		"jasmine-spec-reporter": "^4.2.1",
 		"protractor": "^5.3.1",
 		"ts-node": "^3.3.0",
-		"typescript": "^2.8.1"
+		"typescript": "^2.0.0"
 	},
 	"author": "Ali Kamalizade",
 	"license": "MIT",
 	"engines": {
-		"node": ">=7.6.0"
+		"node": ">=7.0.0"
 	},
 	"bugs": "https://github.com/ali-kamalizade/better-protractor/issues",
 	"repository" :

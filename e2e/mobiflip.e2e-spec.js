@@ -1,6 +1,6 @@
-const protractor = require("protractor"); // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
-const e2e = require("../index.js");
-const service = new e2e();
+require("protractor"); // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
+const e2e = require("../index.ts");
+const service = new e2e.BetterProtractorService();
 
 describe('Mobiflip', () => {
 	it('should open first article', async() => {

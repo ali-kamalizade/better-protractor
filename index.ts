@@ -1,12 +1,13 @@
-require("protractor"); // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
+import {browser, by, element, protractor} from "protractor"; // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
+
 /**
  * Provides helper methods which allow for testing common test cases.
  * @see Page Object in Selenium
  * @type BetterProtractorService - If you add a new method here, please add the method signature in index.d.ts!
  */
-class BetterProtractorService {
+export class BetterProtractorService {
 
-	constructor(isDisabled = false){
+	constructor(isDisabled: boolean = false){
 		if (isDisabled) {
 			this.disableAngular();
 		}
@@ -16,7 +17,7 @@ class BetterProtractorService {
 	 * @returns {wdpromise.Promise<any>}
 	 * @param path {string}
 	 */
-	navigateToRoute(path = '/') {
+	navigateToRoute(path: string = '/') {
 		return browser.get(path);
 	};
 	/**
@@ -24,7 +25,7 @@ class BetterProtractorService {
 	 * @returns {ElementFinder}
 	 * @param elementId {string}
 	 */
-	getDomElementById(elementId) {
+	getDomElementById(elementId: string) {
 		return element(by.id(elementId));
 	};
 	/**
@@ -32,7 +33,7 @@ class BetterProtractorService {
 	 * @returns {ElementFinder}
 	 * @param elementTag {string}
 	 */
-	getDomElementByTag(elementTag) {
+	getDomElementByTag(elementTag: string) {
 		return element(by.tagName(elementTag));
 	};
 	/**
@@ -40,7 +41,7 @@ class BetterProtractorService {
 	 * @returns {ElementFinder}
 	 * @param xpath {string}
 	 */
-	getDomElementByXPath(xpath) {
+	getDomElementByXPath(xpath: string) {
 		return element(by.xpath(xpath));
 	};
 	/**
@@ -184,11 +185,7 @@ class BetterProtractorService {
 	 * @returns {promise.Promise<string>}
 	 * @param useDriver {boolean}
 	 */
-	getUrl(useDriver = false)  {
-		/**
-		 *
-		 * @type {ExtendedWebDriver | ProtractorBrowser}
-		 */
+	getUrl(useDriver: boolean = false)  {
 		const usedBrowser = useDriver? browser.driver : browser;
 		return usedBrowser.getCurrentUrl()
 			.then(
@@ -218,7 +215,7 @@ class BetterProtractorService {
 	 * @param element
 	 * @param attribute {string} e.g. 'value' (to get input value) or 'class'
 	 */
-	getAttributeFromDomElement(element, attribute) {
+	getAttributeFromDomElement(element, attribute: string) {
 		return element.getAttribute(attribute);
 	};
 	/**
@@ -226,7 +223,7 @@ class BetterProtractorService {
 	 * @param url {string} if not passed, then current url will be used
 	 * @return {boolean}
 	 */
-	async checkIfRouteContains(contains, url = undefined) {
+	async checkIfRouteContains(contains: string | any [], url: string = undefined) {
 		if (!url) {
 			url = await this.getUrl();
 		}
@@ -242,7 +239,7 @@ class BetterProtractorService {
 	 * Clear an input
 	 * @param selector {string}
 	 */
-	clearInput(selector) {
+	clearInput(selector: string) {
 		return this.getDomElementByCss(selector).clear();
 	};
 	/**
@@ -251,7 +248,7 @@ class BetterProtractorService {
 	 * @param mobileWidth {number}
 	 * @param mobileHeight {number}
 	 */
-	showMobileView(mobileWidth = 360, mobileHeight = 640) {
+	showMobileView(mobileWidth: number = 360, mobileHeight: number = 640) {
 		return browser.driver.manage().window().setSize(mobileWidth, mobileHeight);
 	};
 	/**
@@ -312,4 +309,3 @@ class BetterProtractorService {
 		return browser.waitForAngularEnabled(false);
 	};
 }
-module.exports = BetterProtractorService;

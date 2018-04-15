@@ -8,6 +8,9 @@ import {IWebDriverOptionsCookie, WebElement} from "selenium-webdriver";
  * @see EndToEndTestingService.js - If you add a new method there, please add the method signature here
  */
 export interface BetterProtractorService {
+
+	new(isDisabled: boolean): BetterProtractorService;
+
 	/**
 	 * Get the current browser URL
 	 * @returns {promise.Promise<string>}

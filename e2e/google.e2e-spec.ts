@@ -2,8 +2,8 @@ import {} from "protractor"; // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVE
 import {BetterProtractorService} from "../index";
 import {Key} from "selenium-webdriver";
 
-const UtilityService = require("../index.js");
-const service: BetterProtractorService = new UtilityService(false);
+const UtilityService = require("../index.ts");
+const service: BetterProtractorService = new UtilityService.BetterProtractorService(false);
 
 describe('Google', () => {
 	it('should look for sedeo', async () => {
