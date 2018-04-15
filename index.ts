@@ -228,7 +228,6 @@ export class BetterProtractorService {
 			url = await this.getUrl();
 		}
 		if(Array.isArray(contains)) {
-			// TODO check if this works
 			return (contains.indexOf(url) !== -1);
 		}
 		else {

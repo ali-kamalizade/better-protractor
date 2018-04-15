@@ -4,12 +4,11 @@ import {IWebDriverOptionsCookie, WebElement} from "selenium-webdriver";
 
 /**
  * Provides helper methods which allow for testing common test cases.
- * For documentation, see EndToEndTestingService.js.
- * @see EndToEndTestingService.js - If you add a new method there, please add the method signature here
+ * @see BetterProtractorService.ts - If you add a new method here, please add the method implementation there
  */
 export interface BetterProtractorService {
 
-	new(isDisabled: boolean): BetterProtractorService;
+	new(isDisabled?: boolean): BetterProtractorService;
 
 	/**
 	 * Get the current browser URL

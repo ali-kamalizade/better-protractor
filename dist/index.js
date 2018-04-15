@@ -298,7 +298,6 @@ var BetterProtractorService = /** @class */ (function () {
                         _a.label = 2;
                     case 2:
                         if (Array.isArray(contains)) {
-                            // TODO check if this works
                             return [2 /*return*/, (contains.indexOf(url) !== -1)];
                         }
                         else {
