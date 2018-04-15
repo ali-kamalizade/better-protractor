@@ -9,7 +9,7 @@ However, Protractor can be used on any kind of web page, Angular is not required
 
 ## Installation:
 1. If you do not have Protractor and Webdriver setup yet, then please do so: [Protractor setup](http://www.protractortest.org/#/tutorial#setup)
-2. Install better-protractor: ```**npm install better-protractor** or **npm install better-protractor --dev**```
+2. Install better-protractor: ```npm install better-protractor``` or ```npm install better-protractor --dev```
 
 ## Usage:
 - **Recommended (Typescript)**: Create a custom class which extends BetterProtractorService. You can override the default methods and add your own custom variables and methods.
