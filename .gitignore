@@ -6,4 +6,5 @@
 /dist/out-tsc/*
 *.js.map
 *.service.js
-/out-tsc
+/dist/e2e
+debug.log

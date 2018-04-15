@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"outDir": "./dist/out-tsc",
+		"outDir": "./dist/",
 		"baseUrl": "",
 		"sourceMap": true,
 		"declaration": false,
