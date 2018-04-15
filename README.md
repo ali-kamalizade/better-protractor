@@ -18,12 +18,12 @@ const service: CustomTestService = new CustomTestService();
 ```
 - You can also directly use *better-protractor*.
 ```javascript
-const UtilityService = require("../index.ts");
+const UtilityService = require("better-protractor/index.ts");
 const service: BetterProtractorService = new UtilityService.BetterProtractorService(false);
 ```
 - You can also use *better-protractor* in Javascript.
 ```javascript
-const e2e = require("../index.ts");
+const e2e = require("better-protractor/index.ts");
 const service = new e2e.BetterProtractorService();
 ```
 - For writing the actual tests, I recommend to use [Jasmine](https://jasmine.github.io/). However, *better-protractor* does not rely on a particular testing framework so you are free to use any Javascript testing framework (e.g. Mocha, Jest, QUnit).
