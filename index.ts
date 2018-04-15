@@ -163,21 +163,21 @@ export class BetterProtractorService {
 	 * Don't let Protractor close the browser after execution
 	 * @return {*}
 	 */
-	pauseBrowser() {
+	pauseBrowser(): any {
 		return browser.pause();
 	};
 	/**
 	 * Don't let Protractor close the browser after execution for a specific time. You can use this as an alternative in case pauseBrowser() does not work.
 	 * @param time {number} in milliseconds
 	 */
-	pauseBrowserTemporarily(time) {
+	pauseBrowserTemporarily(time): any {
 		return browser.sleep(time);
 	};
 	/**
 	 * Wait for Angular to be initialized
 	 * @return {void|promise.Promise<any>}
 	 */
-	waitForBrowser() {
+	waitForBrowser(): any {
 		return browser.waitForAngular();
 	};
 	/**
