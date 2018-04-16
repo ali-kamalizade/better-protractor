@@ -377,13 +377,21 @@ var BetterProtractorService = /** @class */ (function () {
     ;
     /**
      * Scroll to a DOM element
-     * @param selector
+     * @param selector {string}
      * @returns {promise.Promise<void>}
      */
     BetterProtractorService.prototype.scrollToElement = function (selector) {
         return protractor_1.browser.executeScript('document.querySelector(' + selector + ').scrollIntoView()');
     };
     ;
+    /**
+     * Get the number of DOM elements by CSS query
+     * @param {string} selector CSS query
+     * @return {promise.Promise<number>} how many elements were found
+     */
+    BetterProtractorService.prototype.getDomElementsCount = function (selector) {
+        return protractor_1.element.all(protractor_1.by.css(selector)).count();
+    };
     /**
      * Disable Angular (for non-Angular pages or if you encounter problems with Angular lifecycle)
      * @return {promise.Promise<boolean>}
@@ -392,6 +400,34 @@ var BetterProtractorService = /** @class */ (function () {
         return protractor_1.browser.waitForAngularEnabled(false);
     };
     ;
+    /**
+     * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
+     * @return {ProtractorBrowser}
+     */
+    BetterProtractorService.prototype.getProtractorBrowser = function () {
+        return protractor_1.browser;
+    };
+    /**
+     * Get the underlying ProtractorBy if you need to access the Protractor API directly.
+     * @return {ProtractorBy}
+     */
+    BetterProtractorService.prototype.getProtractorBy = function () {
+        return protractor_1.by;
+    };
+    /**
+     * Get the underlying ElementFinder if you need to access the Protractor API directly.
+     * @return {ElementFinder}
+     */
+    BetterProtractorService.prototype.getProtractorElementFinder = function (by) {
+        return protractor_1.element(by);
+    };
+    /**
+     * Get the underlying ElementArrayFinder if you need to access the Protractor API directly.
+     * @return {ElementArrayFinder}
+     */
+    BetterProtractorService.prototype.getProtractorElementArrayFinder = function (by) {
+        return protractor_1.element.all(by);
+    };
     return BetterProtractorService;
 }());
 exports.BetterProtractorService = BetterProtractorService;
