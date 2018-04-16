@@ -1,11 +1,32 @@
 {
 	"name": "better-protractor",
-	"version": "1.0.8",
-	"description": "A library for better end-to-end testing with Protractor",
+	"version": "1.0.9",
+	"description": "Make end-to-end testing with Protractor great (again) - with better-protractor",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"main": "dist/index.js",
+	"author": "Ali Kamalizade",
+	"dependencies": {},
+	"devDependencies": {
+		"@types/core-js": "^0.9.46",
+		"@types/jasmine": "^2.8.6",
+		"@types/node": "^7.0.55",
+		"jasmine-core": "^2.99.1",
+		"jasmine-spec-reporter": "^4.2.1",
+		"protractor": "^5.3.1",
+		"ts-node": "^3.3.0",
+		"typescript": "^2.0.0"
+	},
+	"license": "MIT",
+	"engines": {
+		"node": ">=7.0.0"
+	},
+	"bugs": "https://github.com/ali-kamalizade/better-protractor/issues",
+	"repository" : {
+		"type" : "git",
+		"url" : "https://github.com/ali-kamalizade/better-protractor.git"
+	},
 	"keywords": [
 		"Protractor",
 		"E2E",
@@ -19,27 +40,5 @@
 		"NPM",
 		"Angular.JS",
 		"spec"
-	],
-	"dependencies": {},
-	"devDependencies": {
-		"@types/core-js": "^0.9.46",
-		"@types/jasmine": "^2.8.6",
-		"@types/node": "^7.0.55",
-		"jasmine-core": "^2.99.1",
-		"jasmine-spec-reporter": "^4.2.1",
-		"protractor": "^5.3.1",
-		"ts-node": "^3.3.0",
-		"typescript": "^2.0.0"
-	},
-	"author": "Ali Kamalizade",
-	"license": "MIT",
-	"engines": {
-		"node": ">=7.0.0"
-	},
-	"bugs": "https://github.com/ali-kamalizade/better-protractor/issues",
-	"repository" :
-	{
-		"type" : "git",
-		"url" : "https://github.com/ali-kamalizade/better-protractor.git"
-	}
+	]
 }

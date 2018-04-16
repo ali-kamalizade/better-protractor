@@ -3,7 +3,21 @@
 Test everything you can test with **better-protractor** which relies on Protractor, the awesome end-to-end-testing framework made by the Angular team.
 However, Protractor (and therefore *better-protractor*) can be used on any kind of web page, Angular is not required!
 
+## Features
 *better-protractor* will help you to write better end-to-end tests by providing a simple API on top of Protractor. Optimized for usage with **Typescript**, but tests written in Javascript work as well.
+
+- Navigate to any web page (with relative path support for Angular)
+- Click any element (query by ID, CSS, Xpath, HTML tag)
+- Scroll to a specific element
+- Get browser cookies
+- Press mouse buttons and keyboard keys
+- Fill and clear input fields
+- Get DOM properties of elements
+- Responsiveness: Adjust your window to simulate any device (tablet, smartphone, laptop)
+- Check if elements exist / are visible
+- Submit forms
+- Get the number of elements on a web page by CSS query
+- Access the underlying Protractor API
 
 [Read this article if you want to learn more about end-to-end testing in general.](https://medium.freecodecamp.org/why-end-to-end-testing-is-important-for-your-team-cb7eb0ec1504)
 

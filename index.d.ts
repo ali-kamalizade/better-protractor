@@ -1,5 +1,5 @@
 import {WebdriverWebElement} from "protractor/built/element";
-import {ElementFinder} from "protractor";
+import {ElementArrayFinder, ElementFinder, ProtractorBrowser, ProtractorBy} from "protractor";
 import {IWebDriverOptionsCookie, WebElement} from "selenium-webdriver";
 
 /**
@@ -49,8 +49,8 @@ export interface BetterProtractorService {
 	 */
 	checkIfRouteContains(contains: string, url?: string): boolean;
 	/**
-	 * Use this method to set the browser window to a specific size( default ist 360 x 640).
-	 * If this method crashes the browser, then you may need to update with "webdriver-manager update".
+	 * Use this method to set the browser window to a specific size( default is 360 x 640).
+	 * If this method crashes the browser, then you may need to update with the command "webdriver-manager update".
 	 * @param width {number}
 	 * @param height {number}
 	 */
@@ -214,4 +214,30 @@ export interface BetterProtractorService {
 	 * @return {!promise.Promise<string>|promise.Promise<string>}
 	 */
 	getLanguage(): string;
+	/**
+	 * Get the number of DOM elements by CSS query
+	 * @param {string} selector CSS query
+	 * @return {promise.Promise<number>} how many elements were found
+	 */
+	getDomElementsCount(selector: string): any;
+	/**
+	 * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
+	 * @return {ProtractorBrowser}
+	 */
+	getProtractorBrowser(): ProtractorBrowser;
+	/**
+	 * Get the underlying ProtractorBy if you need to access the Protractor API directly.
+	 * @return {ProtractorBy}
+	 */
+	getProtractorBy(): ProtractorBy;
+	/**
+	 * Get the underlying ElementFinder if you need to access the Protractor API directly.
+	 * @return {ElementFinder}
+	 */
+	getProtractorElementFinder(by: any): ElementFinder;
+	/**
+	 * Get the underlying ElementArrayFinder if you need to access the Protractor API directly.
+	 * @return {ElementArrayFinder}
+	 */
+	getProtractorElementArrayFinder(by: any) : ElementArrayFinder;
 }

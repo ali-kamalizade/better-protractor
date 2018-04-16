@@ -1,4 +1,4 @@
-import {browser, by, element, protractor} from "protractor"; // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
+import {browser, by, element, protractor, ProtractorBy} from "protractor"; // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
 
 /**
  * Provides helper methods which allow for testing common test cases.
@@ -49,7 +49,7 @@ export class BetterProtractorService {
 	 * @returns {ElementFinder}
 	 * @param selector {string}
 	 */
-	getDomElementByCss(selector) {
+	getDomElementByCss(selector: string) {
 		return element(by.css(selector));
 	};
 	/**
@@ -65,14 +65,14 @@ export class BetterProtractorService {
 	 * @param index {number}
 	 * @return {ElementFinder}
 	 */
-	getDomElementByIndex(selector, index) {
+	getDomElementByIndex(selector: string, index: number) {
 		return protractor.element.all(by.css(selector)).get(index);
 	};
 	/**
 	 * @param css {string} the CSS selector
 	 * @param text {string}
 	 */
-	getDomElementByText(css, text) {
+	getDomElementByText(css: string, text) {
 		return element(by.cssContainingText(css, text));
 	};
 	/**
@@ -80,7 +80,7 @@ export class BetterProtractorService {
 	 * @param selector {string}
 	 * @param input
 	 */
-	fillInput(selector, input) {
+	fillInput(selector: string, input) {
 		return this.getDomElementByCss(selector).sendKeys(input);
 	};
 	/**
@@ -103,7 +103,7 @@ export class BetterProtractorService {
 	 * @returns {Promise}
 	 * @param css {string}
 	 */
-	clickElementByCss(css) {
+	clickElementByCss(css: string) {
 		return this.clickElement(element(by.css(css)));
 	};
 	/**
@@ -111,7 +111,7 @@ export class BetterProtractorService {
 	 * @returns {Promise}
 	 * @param elementId {string}
 	 */
-	clickElementById(elementId) {
+	clickElementById(elementId: string) {
 		return this.clickElement(element(by.id(elementId)));
 	};
 	/**
@@ -119,7 +119,7 @@ export class BetterProtractorService {
 	 * @returns {Promise}
 	 * @param elementTag {string}
 	 */
-	clickElementByTag(elementTag) {
+	clickElementByTag(elementTag: string) {
 		return this.clickElement(element(by.tagName(elementTag)));
 	};
 	/**
@@ -127,7 +127,7 @@ export class BetterProtractorService {
 	 * @returns {Promise}
 	 * @param xpath {string}
 	 */
-	clickElementByXPath(xpath) {
+	clickElementByXPath(xpath: string) {
 		return this.clickElement(element(by.xpath(xpath)));
 	};
 	/**
@@ -149,14 +149,14 @@ export class BetterProtractorService {
 	 * Press key on keyboard (e.g. TAB or ENTER)
 	 * @param key {string}
 	 */
-	pressKey(key) {
+	pressKey(key: string) {
 		return browser.actions().sendKeys(key).perform();
 	};
 	/**
 	 * Press a mouse button
 	 * @param action {string}
 	 */
-	pressMouseButton(action) {
+	pressMouseButton(action: string) {
 		return browser.actions().click(action).perform();
 	};
 	/**
@@ -294,12 +294,20 @@ export class BetterProtractorService {
 	};
 	/**
 	 * Scroll to a DOM element
-	 * @param selector
+	 * @param selector {string}
 	 * @returns {promise.Promise<void>}
 	 */
-	scrollToElement(selector) {
+	scrollToElement(selector: string) {
 		return browser.executeScript('document.querySelector(' + selector + ').scrollIntoView()');
 	};
+	/**
+	 * Get the number of DOM elements by CSS query
+	 * @param {string} selector CSS query
+	 * @return {promise.Promise<number>} how many elements were found
+	 */
+	getDomElementsCount(selector: string) {
+		return element.all(by.css(selector)).count();
+	}
 	/**
 	 * Disable Angular (for non-Angular pages or if you encounter problems with Angular lifecycle)
 	 * @return {promise.Promise<boolean>}
@@ -307,4 +315,32 @@ export class BetterProtractorService {
 	disableAngular() {
 		return browser.waitForAngularEnabled(false);
 	};
+	/**
+	 * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
+	 * @return {ProtractorBrowser}
+	 */
+	getProtractorBrowser() {
+		return browser;
+	}
+	/**
+	 * Get the underlying ProtractorBy if you need to access the Protractor API directly.
+	 * @return {ProtractorBy}
+	 */
+	getProtractorBy() {
+		return by;
+	}
+	/**
+	 * Get the underlying ElementFinder if you need to access the Protractor API directly.
+	 * @return {ElementFinder}
+	 */
+	getProtractorElementFinder(by: any) {
+		return element(by);
+	}
+	/**
+	 * Get the underlying ElementArrayFinder if you need to access the Protractor API directly.
+	 * @return {ElementArrayFinder}
+	 */
+	getProtractorElementArrayFinder(by: any) {
+		return element.all(by);
+	}
 }
