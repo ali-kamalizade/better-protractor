@@ -34,7 +34,8 @@ exports.config = {
 	},
 	onPrepare() {
 		jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
-		const UtilityService = require('./index.ts');
+		//const UtilityService = require('./index.ts');
+		const UtilityService = require('./dist/index.js');
 		const service = new UtilityService.BetterProtractorService();
 		// for better testing: disable Angular on non-Angular page and maximize window
 		service.disableAngular();
