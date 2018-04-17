@@ -8,3 +8,4 @@
 *.service.js
 /dist/e2e
 debug.log
+*.iml
