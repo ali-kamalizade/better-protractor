@@ -1,4 +1,5 @@
 import {browser, by, element, protractor, ProtractorBy} from "protractor"; // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
+import {Key} from "selenium-webdriver";
 
 /**
  * Provides helper methods which allow for testing common test cases.
@@ -309,6 +310,15 @@ export class BetterProtractorService {
 	 */
 	getDomElementsCount(selector: string) {
 		return element.all(by.css(selector)).count();
+	}
+	/**
+	 *
+	 * @param {string} selector
+	 * @returns {Promise<promise.Promise<void>>}
+	 */
+	async deleteCharsFromInput(selector: string) {
+		await this.clickElementByCss(selector);
+		return this.pressKey(Key.BACK_SPACE);
 	}
 	/**
 	 * Check if a page is served using the secure HTTPS

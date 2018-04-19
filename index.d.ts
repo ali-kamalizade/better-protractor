@@ -227,6 +227,12 @@ export interface BetterProtractorService {
 	 */
 	isHttps(url?: string);
 	/**
+	 *
+	 * @param {string} selector
+	 * @returns {Promise<promise.Promise<void>>}
+	 */
+	deleteCharsFromInput(selector: string);
+	/**
 	 * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
 	 * @return {ProtractorBrowser}
 	 */
