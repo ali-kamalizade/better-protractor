@@ -251,10 +251,15 @@ export interface BetterProtractorService {
 	closeWindow();
 	/**
 	 * Get the size of an element in px.
-	 * @param selector {string}
+	 * @param selector {string} CSS query
 	 * @returns {Promise<promise.Promise<ISize>>}
 	 */
 	getElementSize(selector: string);
+	/**
+	 * Represents a library of canned expected conditions that are useful for protractor, especially when dealing with non-angular apps.
+	 * @returns {Promise<ProtractorExpectedConditions>}
+	 */
+	getProtractorExpectedConditions();
 	/**
 	 * Take a screenshot and save it.
 	 * TODO Check if this works for other users

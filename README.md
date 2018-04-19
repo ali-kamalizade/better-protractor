@@ -17,6 +17,7 @@ However, Protractor (and therefore *better-protractor*) can be used on any kind 
 - Check if elements exist / are visible
 - Submit forms
 - Get the number of elements on a web page by CSS query
+- Get the size of any element
 - Access the underlying Protractor API
 
 [Read this article if you want to learn more about end-to-end testing in general.](https://medium.freecodecamp.org/why-end-to-end-testing-is-important-for-your-team-cb7eb0ec1504)

@@ -424,7 +424,7 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Get the size of an element in px.
-     * @param selector {string}
+     * @param selector {string} CSS query
      * @returns {Promise<promise.Promise<ISize>>}
      */
     BetterProtractorService.prototype.getElementSize = function (selector) {
@@ -434,6 +434,17 @@ var BetterProtractorService = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.getDomElementByCss(selector)];
                     case 1: return [2 /*return*/, (_a.sent()).getSize()];
                 }
+            });
+        });
+    };
+    /**
+     * Represents a library of canned expected conditions that are useful for protractor, especially when dealing with non-angular apps.
+     * @returns {Promise<ProtractorExpectedConditions>}
+     */
+    BetterProtractorService.prototype.getProtractorExpectedConditions = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, protractor_1.protractor.ExpectedConditions];
             });
         });
     };
