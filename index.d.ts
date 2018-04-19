@@ -228,10 +228,11 @@ export interface BetterProtractorService {
 	isHttps(url?: string);
 	/**
 	 *
-	 * @param {string} selector
+	 * @param {string} selector CSS query
+	 * @param {number} count how many times to do this
 	 * @returns {Promise<promise.Promise<void>>}
 	 */
-	deleteCharsFromInput(selector: string);
+	deleteCharsFromInput(selector: string, count?: number);
 	/**
 	 * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
 	 * @return {ProtractorBrowser}

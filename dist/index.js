@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var protractor_1 = require("protractor"); // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
+var selenium_webdriver_1 = require("selenium-webdriver");
 /**
  * Provides helper methods which allow for testing common test cases.
  * @see Page Object in Selenium
@@ -359,6 +360,36 @@ var BetterProtractorService = /** @class */ (function () {
      */
     BetterProtractorService.prototype.getDomElementsCount = function (selector) {
         return protractor_1.element.all(protractor_1.by.css(selector)).count();
+    };
+    /**
+     *
+     * @param {string} selector CSS query
+     * @param {number} count how many times to do this
+     * @returns {Promise<promise.Promise<void>>}
+     */
+    BetterProtractorService.prototype.deleteCharsFromInput = function (selector, count) {
+        return __awaiter(this, void 0, void 0, function () {
+            var temp;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.clickElementByCss(selector)];
+                    case 1:
+                        _a.sent();
+                        if (typeof count === 'number') {
+                            temp = 0;
+                            while (temp < count - 1) {
+                                this.pressKey(selenium_webdriver_1.Key.BACK_SPACE);
+                                temp++;
+                            }
+                            return [2 /*return*/, this.pressKey(selenium_webdriver_1.Key.BACK_SPACE)];
+                        }
+                        else {
+                            return [2 /*return*/, this.pressKey(selenium_webdriver_1.Key.BACK_SPACE)];
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     /**
      * Check if a page is served using the secure HTTPS

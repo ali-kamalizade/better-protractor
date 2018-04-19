@@ -313,12 +313,23 @@ export class BetterProtractorService {
 	}
 	/**
 	 *
-	 * @param {string} selector
+	 * @param {string} selector CSS query
+	 * @param {number} count how many times to do this
 	 * @returns {Promise<promise.Promise<void>>}
 	 */
-	async deleteCharsFromInput(selector: string) {
+	async deleteCharsFromInput(selector: string, count?: number) {
 		await this.clickElementByCss(selector);
-		return this.pressKey(Key.BACK_SPACE);
+		if (typeof count === 'number') {
+			let temp: number = 0;
+			while (temp < count - 1) {
+				this.pressKey(Key.BACK_SPACE);
+				temp++;
+			}
+			return this.pressKey(Key.BACK_SPACE);
+		}
+		else {
+			return this.pressKey(Key.BACK_SPACE);
+		}
 	}
 	/**
 	 * Check if a page is served using the secure HTTPS
