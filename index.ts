@@ -312,23 +312,43 @@ export class BetterProtractorService {
 		return element.all(by.css(selector)).count();
 	}
 	/**
-	 *
+	 * Delete characters of an <input> or <textarea> element
 	 * @param {string} selector CSS query
-	 * @param {number} count how many times to do this
+	 * @param {number} count how many times to do this. Otherwise, it will be done once.
 	 * @returns {Promise<promise.Promise<void>>}
 	 */
 	async deleteCharsFromInput(selector: string, count?: number) {
-		await this.clickElementByCss(selector);
+		this.clickElementByCss(selector);
 		if (typeof count === 'number') {
 			let temp: number = 0;
 			while (temp < count - 1) {
 				this.pressKey(Key.BACK_SPACE);
+				this.pauseBrowserTemporarily(400);
 				temp++;
 			}
 			return this.pressKey(Key.BACK_SPACE);
 		}
 		else {
 			return this.pressKey(Key.BACK_SPACE);
+		}
+	}
+	/**
+	 * Press the TAB key
+	 * @param {number} count how many times TAB key should be pressed. Otherwise, it will be pressed once.
+	 * @returns {promise.Promise<void>}
+	 */
+	pressTab(count?: number) {
+		if (typeof count === 'number') {
+			let temp: number = 0;
+			while (temp < count - 1) {
+				this.pressKey(Key.TAB);
+				this.pauseBrowserTemporarily(400);
+				temp++;
+			}
+			return this.pressKey(Key.TAB);
+		}
+		else {
+			return this.pressKey(Key.TAB);
 		}
 	}
 	/**

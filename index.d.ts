@@ -227,12 +227,18 @@ export interface BetterProtractorService {
 	 */
 	isHttps(url?: string);
 	/**
-	 *
+	 * Delete characters of an <input> or <textarea> element
 	 * @param {string} selector CSS query
-	 * @param {number} count how many times to do this
+	 * @param {number} count how many times to do this. Otherwise, it will be done once.
 	 * @returns {Promise<promise.Promise<void>>}
 	 */
 	deleteCharsFromInput(selector: string, count?: number);
+	/**
+	 * Press the TAB key
+	 * @param {number} count how many times TAB key should be pressed. Otherwise, it will be pressed once.
+	 * @returns {promise.Promise<void>}
+	 */
+	pressTab(count?: number);
 	/**
 	 * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
 	 * @return {ProtractorBrowser}

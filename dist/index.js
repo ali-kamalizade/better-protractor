@@ -362,34 +362,50 @@ var BetterProtractorService = /** @class */ (function () {
         return protractor_1.element.all(protractor_1.by.css(selector)).count();
     };
     /**
-     *
+     * Delete characters of an <input> or <textarea> element
      * @param {string} selector CSS query
-     * @param {number} count how many times to do this
+     * @param {number} count how many times to do this. Otherwise, it will be done once.
      * @returns {Promise<promise.Promise<void>>}
      */
     BetterProtractorService.prototype.deleteCharsFromInput = function (selector, count) {
         return __awaiter(this, void 0, void 0, function () {
             var temp;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.clickElementByCss(selector)];
-                    case 1:
-                        _a.sent();
-                        if (typeof count === 'number') {
-                            temp = 0;
-                            while (temp < count - 1) {
-                                this.pressKey(selenium_webdriver_1.Key.BACK_SPACE);
-                                temp++;
-                            }
-                            return [2 /*return*/, this.pressKey(selenium_webdriver_1.Key.BACK_SPACE)];
-                        }
-                        else {
-                            return [2 /*return*/, this.pressKey(selenium_webdriver_1.Key.BACK_SPACE)];
-                        }
-                        return [2 /*return*/];
+                this.clickElementByCss(selector);
+                if (typeof count === 'number') {
+                    temp = 0;
+                    while (temp < count - 1) {
+                        this.pressKey(selenium_webdriver_1.Key.BACK_SPACE);
+                        this.pauseBrowserTemporarily(400);
+                        temp++;
+                    }
+                    return [2 /*return*/, this.pressKey(selenium_webdriver_1.Key.BACK_SPACE)];
                 }
+                else {
+                    return [2 /*return*/, this.pressKey(selenium_webdriver_1.Key.BACK_SPACE)];
+                }
+                return [2 /*return*/];
             });
         });
+    };
+    /**
+     * Press the TAB key
+     * @param {number} count how many times TAB key should be pressed. Otherwise, it will be pressed once.
+     * @returns {promise.Promise<void>}
+     */
+    BetterProtractorService.prototype.pressTab = function (count) {
+        if (typeof count === 'number') {
+            var temp = 0;
+            while (temp < count - 1) {
+                this.pressKey(selenium_webdriver_1.Key.TAB);
+                this.pauseBrowserTemporarily(400);
+                temp++;
+            }
+            return this.pressKey(selenium_webdriver_1.Key.TAB);
+        }
+        else {
+            return this.pressKey(selenium_webdriver_1.Key.TAB);
+        }
     };
     /**
      * Check if a page is served using the secure HTTPS
