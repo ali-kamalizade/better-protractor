@@ -9,3 +9,4 @@
 /dist/e2e
 debug.log
 *.iml
+*protractor.png

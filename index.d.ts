@@ -240,6 +240,16 @@ export interface BetterProtractorService {
 	 */
 	pressTab(count?: number);
 	/**
+	 * Get the current web page title.
+	 * @returns {any}
+	 */
+	getBrowserTitle();
+	/**
+	 * Close the current window.
+	 * @returns {any}
+	 */
+	closeWindow();
+	/**
 	 * Restart the browser. Beware that you need to call disableAngular() again if your web page is running not Angular.
 	 * @returns {promise.Promise<ProtractorBrowser>}
 	 */

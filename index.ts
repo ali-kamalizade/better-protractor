@@ -1,5 +1,6 @@
 import {browser, by, element, protractor, ProtractorBy} from "protractor"; // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
 import {Key} from "selenium-webdriver";
+import * as fs from "fs";
 
 /**
  * Provides helper methods which allow for testing common test cases.
@@ -350,6 +351,32 @@ export class BetterProtractorService {
 		else {
 			return this.pressKey(Key.TAB);
 		}
+	}
+	/**
+	 * Get the current web page title.
+	 * @returns {any}
+	 */
+	getBrowserTitle() {
+		return browser.getTitle();
+	}
+	/**
+	 * Close the current window.
+	 * @returns {any}
+	 */
+	closeWindow() {
+		return browser.close();
+	}
+	/**
+	 * Take a screenshot and save it.
+	 * TODO Check if this works for other users
+	 * @returns {any}
+	 */
+	screenshot() {
+		return browser.takeScreenshot().then((screenshot: string) => {
+			const stream = fs.createWriteStream('protractor.png');
+			stream.write(new Buffer(screenshot, 'base64'));
+			stream.end();
+		});
 	}
 	/**
 	 * Check if a page is served using the secure HTTPS
