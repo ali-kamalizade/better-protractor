@@ -7,6 +7,9 @@ import {browser, by, element, protractor, ProtractorBy} from "protractor"; // TO
  */
 export class BetterProtractorService {
 
+	/**
+	 * @param {boolean} isDisabled if Angular change detection should be disabled
+	 */
 	constructor(isDisabled: boolean = false){
 		if (isDisabled) {
 			this.disableAngular();
@@ -19,7 +22,7 @@ export class BetterProtractorService {
 	 */
 	navigateToRoute(path: string = '/') {
 		return browser.get(path);
-	};
+	}
 	/**
 	 * Get an element by its DOM id
 	 * @returns {ElementFinder}
@@ -27,7 +30,7 @@ export class BetterProtractorService {
 	 */
 	getDomElementById(elementId: string) {
 		return element(by.id(elementId));
-	};
+	}
 	/**
 	 * Get an element by its DOM tag
 	 * @returns {ElementFinder}
@@ -35,7 +38,7 @@ export class BetterProtractorService {
 	 */
 	getDomElementByTag(elementTag: string) {
 		return element(by.tagName(elementTag));
-	};
+	}
 	/**
 	 * Get an element by its XPath
 	 * @returns {ElementFinder}
@@ -43,7 +46,7 @@ export class BetterProtractorService {
 	 */
 	getDomElementByXPath(xpath: string) {
 		return element(by.xpath(xpath));
-	};
+	}
 	/**
 	 * Get an element by CSS query
 	 * @returns {ElementFinder}
@@ -51,7 +54,7 @@ export class BetterProtractorService {
 	 */
 	getDomElementByCss(selector: string) {
 		return element(by.css(selector));
-	};
+	}
 	/**
 	 * Get an element
 	 * @returns {WebElementPromise}
@@ -59,7 +62,7 @@ export class BetterProtractorService {
 	 */
 	getElementAsWebElement(element) {
 		return element.getWebElement();
-	};
+	}
 	/**
 	 * @param selector {string}
 	 * @param index {number}
@@ -67,14 +70,14 @@ export class BetterProtractorService {
 	 */
 	getDomElementByIndex(selector: string, index: number) {
 		return protractor.element.all(by.css(selector)).get(index);
-	};
+	}
 	/**
 	 * @param css {string} the CSS selector
 	 * @param text {string}
 	 */
 	getDomElementByText(css: string, text) {
 		return element(by.cssContainingText(css, text));
-	};
+	}
 	/**
 	 * Fill a <input> or <textarea> with content
 	 * @param selector {string}
@@ -82,14 +85,14 @@ export class BetterProtractorService {
 	 */
 	fillInput(selector: string, input) {
 		return this.getDomElementByCss(selector).sendKeys(input);
-	};
+	}
 	/**
 	 * Submit the form containing the element
 	 * @param element {WebElement}
 	 */
 	submitForm(element) {
 		return element.submit();
-	};
+	}
 	/**
 	 * Click a element
 	 * @returns {Promise}
@@ -97,7 +100,7 @@ export class BetterProtractorService {
 	 */
 	clickElement(element) {
 		return element.click();
-	};
+	}
 	/**
 	 * Click a element by CSS
 	 * @returns {Promise}
@@ -105,7 +108,7 @@ export class BetterProtractorService {
 	 */
 	clickElementByCss(css: string) {
 		return this.clickElement(element(by.css(css)));
-	};
+	}
 	/**
 	 * Click a element by ID
 	 * @returns {Promise}
@@ -113,7 +116,7 @@ export class BetterProtractorService {
 	 */
 	clickElementById(elementId: string) {
 		return this.clickElement(element(by.id(elementId)));
-	};
+	}
 	/**
 	 * Click a element with an tag
 	 * @returns {Promise}
@@ -121,7 +124,7 @@ export class BetterProtractorService {
 	 */
 	clickElementByTag(elementTag: string) {
 		return this.clickElement(element(by.tagName(elementTag)));
-	};
+	}
 	/**
 	 * Click a element by XPath
 	 * @returns {Promise}
@@ -129,7 +132,7 @@ export class BetterProtractorService {
 	 */
 	clickElementByXPath(xpath: string) {
 		return this.clickElement(element(by.xpath(xpath)));
-	};
+	}
 	/**
 	 * Click element by link text
 	 * @param text {string}
@@ -137,49 +140,49 @@ export class BetterProtractorService {
 	 */
 	clickElementByLinkText(text) {
 		return this.clickElement(element(by.linkText(text)));
-	};
+	}
 	/**
 	 * Click a web element. Try this if clickElement() is not working
 	 * @param element {WebElement}
 	 */
 	clickWebElement(element) {
 		return browser.actions().mouseMove(element).click().perform();
-	};
+	}
 	/**
 	 * Press key on keyboard (e.g. TAB or ENTER)
 	 * @param key {string}
 	 */
 	pressKey(key: string) {
 		return browser.actions().sendKeys(key).perform();
-	};
+	}
 	/**
 	 * Press a mouse button
 	 * @param action {string}
 	 */
 	pressMouseButton(action: string) {
 		return browser.actions().click(action).perform();
-	};
+	}
 	/**
 	 * Don't let Protractor close the browser after execution
 	 * @return {*}
 	 */
 	pauseBrowser(): any {
 		return browser.pause();
-	};
+	}
 	/**
 	 * Don't let Protractor close the browser after execution for a specific time. You can use this as an alternative in case pauseBrowser() does not work.
 	 * @param time {number} in milliseconds
 	 */
-	pauseBrowserTemporarily(time): any {
+	pauseBrowserTemporarily(time: number): any {
 		return browser.sleep(time);
-	};
+	}
 	/**
 	 * Wait for Angular to be initialized
 	 * @return {void|promise.Promise<any>}
 	 */
 	waitForBrowser(): any {
 		return browser.waitForAngular();
-	};
+	}
 	/**
 	 * Get the current browser URL
 	 * @returns {promise.Promise<string>}
@@ -193,7 +196,7 @@ export class BetterProtractorService {
 					return url;
 				}
 		);
-	};
+	}
 	/**
 	 * Check if a element is visible and if it can be selected
 	 * @param element
@@ -201,7 +204,7 @@ export class BetterProtractorService {
 	 */
 	checkIfExists(element)  {
 		return element.isPresent();
-	};
+	}
 	/**
 	 * Check if a element is visible
 	 * @param element
@@ -209,7 +212,7 @@ export class BetterProtractorService {
 	 */
 	checkIfVisible(element) {
 		return element.isDisplayed();
-	};
+	}
 	/**
 	 * Get an attribute from a DOM element (e.g. class)
 	 * @param element
@@ -217,7 +220,7 @@ export class BetterProtractorService {
 	 */
 	getAttributeFromDomElement(element, attribute: string) {
 		return element.getAttribute(attribute);
-	};
+	}
 	/**
 	 * @param contains {string | Array}
 	 * @param url {string} if not passed, then current url will be used
@@ -233,14 +236,14 @@ export class BetterProtractorService {
 		else {
 			return typeof url === 'string' ? (url.indexOf(contains) !== -1) : false;
 		}
-	};
+	}
 	/**
 	 * Clear an input
 	 * @param selector {string}
 	 */
 	clearInput(selector: string) {
 		return this.getDomElementByCss(selector).clear();
-	};
+	}
 	/**
 	 * Use this method to set the browser window to a specific size.
 	 * If this method crashes the browser, then you need to update with "webdriver-manager update".
@@ -249,7 +252,7 @@ export class BetterProtractorService {
 	 */
 	showMobileView(mobileWidth: number = 360, mobileHeight: number = 640) {
 		return browser.driver.manage().window().setSize(mobileWidth, mobileHeight);
-	};
+	}
 	/**
 	 * Get height and width of browser window
 	 * @return {promise.Promise<ISize>}
@@ -258,7 +261,7 @@ export class BetterProtractorService {
 		return browser.driver.manage().window().getSize().then((size) =>  {
 			return size;
 		});
-	};
+	}
 	/**
 	 * Use this method to maximize the browser window.
 	 * If this method crashes the browser, then you need to update with "webdriver-manager update".
@@ -266,7 +269,7 @@ export class BetterProtractorService {
 	 */
 	maximizeWindow() {
 		return browser.driver.manage().window().maximize();
-	};
+	}
 	/**
 	 * Get browser cookies
 	 * @returns {promise.Promise<IWebDriverOptionsCookie>}
@@ -275,31 +278,30 @@ export class BetterProtractorService {
 		return browser.manage().getCookies().then((cookies) => {
 			return cookies;
 		});
-	};
+	}
 	/**
 	 * Get a style property of an element (e.g. 'color')
 	 * @param element
 	 * @param property {string}
 	 */
-	getStyleValue(element, property) {
+	getStyleValue(element, property: string) {
 		return element.getCssValue(property);
-	};
-
+	}
 	/**
 	 * Get currently used language
 	 * @return {!promise.Promise<string>|promise.Promise<string>}
 	 */
 	getLanguage() {
 		return browser.executeScript('return window.navigator.language;');
-	};
+	}
 	/**
 	 * Scroll to a DOM element
 	 * @param selector {string}
 	 * @returns {promise.Promise<void>}
 	 */
 	scrollToElement(selector: string) {
-		return browser.executeScript('document.querySelector(' + selector + ').scrollIntoView()');
-	};
+		return browser.executeScript('document.querySelector("' + selector + '").scrollIntoView({behavior: "smooth"})');
+	}
 	/**
 	 * Get the number of DOM elements by CSS query
 	 * @param {string} selector CSS query
@@ -309,12 +311,20 @@ export class BetterProtractorService {
 		return element.all(by.css(selector)).count();
 	}
 	/**
+	 * Check if a page is served using the secure HTTPS
+	 * @param {string} url if no URL is provided, then the current URL will be used
+	 * @returns {Promise<boolean>}
+	 */
+	async isHttps(url?: string) {
+		return (url? url : (await this.getUrl())).indexOf('https://') !== -1;
+	}
+	/**
 	 * Disable Angular (for non-Angular pages or if you encounter problems with Angular lifecycle)
 	 * @return {promise.Promise<boolean>}
 	 */
 	disableAngular() {
 		return browser.waitForAngularEnabled(false);
-	};
+	}
 	/**
 	 * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
 	 * @return {ProtractorBrowser}

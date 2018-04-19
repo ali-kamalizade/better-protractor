@@ -221,6 +221,12 @@ export interface BetterProtractorService {
 	 */
 	getDomElementsCount(selector: string): any;
 	/**
+	 * Check if a page is served using the secure HTTPS
+	 * @param {string} url if no URL is provided, then the current URL will be used
+	 * @returns {Promise<boolean>}
+	 */
+	isHttps(url?: string);
+	/**
 	 * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
 	 * @return {ProtractorBrowser}
 	 */
