@@ -245,6 +245,12 @@ export interface BetterProtractorService {
 	 */
 	restartBrowser();
 	/**
+	 * Refresh current tab
+	 * @param {number} timeout
+	 * @returns {promise.Promise<any>}
+	 */
+	refresh(timeout?: number);
+	/**
 	 * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
 	 * @return {ProtractorBrowser}
 	 */

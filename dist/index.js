@@ -438,6 +438,14 @@ var BetterProtractorService = /** @class */ (function () {
         return protractor_1.browser.restart();
     };
     /**
+     * Refresh current tab
+     * @param {number} timeout
+     * @returns {promise.Promise<any>}
+     */
+    BetterProtractorService.prototype.refresh = function (timeout) {
+        return protractor_1.browser.refresh(timeout);
+    };
+    /**
      * Disable Angular (for non-Angular pages or if you encounter problems with Angular lifecycle)
      * @return {promise.Promise<boolean>}
      */

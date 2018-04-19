@@ -367,6 +367,14 @@ export class BetterProtractorService {
 		return browser.restart();
 	}
 	/**
+	 * Refresh current tab
+	 * @param {number} timeout
+	 * @returns {promise.Promise<any>}
+	 */
+	refresh(timeout?: number) {
+		return browser.refresh(timeout);
+	}
+	/**
 	 * Disable Angular (for non-Angular pages or if you encounter problems with Angular lifecycle)
 	 * @return {promise.Promise<boolean>}
 	 */
