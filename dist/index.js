@@ -423,6 +423,21 @@ var BetterProtractorService = /** @class */ (function () {
         return protractor_1.browser.close();
     };
     /**
+     * Get the size of an element in px.
+     * @param selector {string}
+     * @returns {Promise<promise.Promise<ISize>>}
+     */
+    BetterProtractorService.prototype.getElementSize = function (selector) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getDomElementByCss(selector)];
+                    case 1: return [2 /*return*/, (_a.sent()).getSize()];
+                }
+            });
+        });
+    };
+    /**
      * Take a screenshot and save it.
      * TODO Check if this works for other users
      * @returns {any}

@@ -367,6 +367,14 @@ export class BetterProtractorService {
 		return browser.close();
 	}
 	/**
+	 * Get the size of an element in px.
+	 * @param selector {string}
+	 * @returns {Promise<promise.Promise<ISize>>}
+	 */
+	async getElementSize(selector: string) {
+		return (await this.getDomElementByCss(selector)).getSize();
+	}
+	/**
 	 * Take a screenshot and save it.
 	 * TODO Check if this works for other users
 	 * @returns {any}

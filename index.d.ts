@@ -250,6 +250,12 @@ export interface BetterProtractorService {
 	 */
 	closeWindow();
 	/**
+	 * Get the size of an element in px.
+	 * @param selector {string}
+	 * @returns {Promise<promise.Promise<ISize>>}
+	 */
+	getElementSize(selector: string);
+	/**
 	 * Take a screenshot and save it.
 	 * TODO Check if this works for other users
 	 * @returns {any}
