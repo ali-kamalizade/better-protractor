@@ -250,6 +250,12 @@ export interface BetterProtractorService {
 	 */
 	closeWindow();
 	/**
+	 * Take a screenshot and save it.
+	 * TODO Check if this works for other users
+	 * @returns {any}
+	 */
+	screenshot();
+	/**
 	 * Restart the browser. Beware that you need to call disableAngular() again if your web page is running not Angular.
 	 * @returns {promise.Promise<ProtractorBrowser>}
 	 */

@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var protractor_1 = require("protractor"); // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
 var selenium_webdriver_1 = require("selenium-webdriver");
+var fs = require("fs");
 /**
  * Provides helper methods which allow for testing common test cases.
  * @see Page Object in Selenium
@@ -406,6 +407,32 @@ var BetterProtractorService = /** @class */ (function () {
         else {
             return this.pressKey(selenium_webdriver_1.Key.TAB);
         }
+    };
+    /**
+     * Get the current web page title.
+     * @returns {any}
+     */
+    BetterProtractorService.prototype.getBrowserTitle = function () {
+        return protractor_1.browser.getTitle();
+    };
+    /**
+     * Close the current window.
+     * @returns {any}
+     */
+    BetterProtractorService.prototype.closeWindow = function () {
+        return protractor_1.browser.close();
+    };
+    /**
+     * Take a screenshot and save it.
+     * TODO Check if this works for other users
+     * @returns {any}
+     */
+    BetterProtractorService.prototype.screenshot = function () {
+        return protractor_1.browser.takeScreenshot().then(function (screenshot) {
+            var stream = fs.createWriteStream('protractor.png');
+            stream.write(new Buffer(screenshot, 'base64'));
+            stream.end();
+        });
     };
     /**
      * Check if a page is served using the secure HTTPS
