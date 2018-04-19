@@ -3,7 +3,7 @@ require("protractor"); // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPE
 const e2e = require("../dist/index.js");
 const service = new e2e.BetterProtractorService();
 
-describe('Mobiflip', () => {
+fdescribe('Mobiflip', () => {
 	it('should open first article', async() => {
 		service.disableAngular();
 		service.navigateToRoute('https://mobiflip.de');
@@ -11,5 +11,7 @@ describe('Mobiflip', () => {
 		expect(await service.checkIfRouteContains('mobiflip')).toBe(true);
 		service.clickElementByCss('.blog-widget-list > .infinite-post:first-child');
 		service.pauseBrowserTemporarily(1000);
+		await service.scrollToElement('.sharep');
+		service.pauseBrowserTemporarily(2000);
 	});
 });

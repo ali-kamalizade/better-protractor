@@ -298,11 +298,11 @@ export class BetterProtractorService {
 	}
 	/**
 	 * Scroll to a DOM element
-	 * @param selector {string}
+	 * @param selector {string} CSS query
 	 * @returns {promise.Promise<void>}
 	 */
 	scrollToElement(selector: string) {
-		return browser.executeScript('document.querySelector("' + selector + '").scrollIntoView({behavior: "smooth"})');
+		return browser.executeScript(`document.querySelector(${selector}).scrollIntoView({behavior: "smooth"})`);
 	}
 	/**
 	 * Get the number of DOM elements by CSS query
