@@ -360,6 +360,13 @@ export class BetterProtractorService {
 		return (url? url : (await this.getUrl())).indexOf('https://') !== -1;
 	}
 	/**
+	 * Restart the browser. Beware that you need to call disableAngular() again if your web page is running not Angular.
+	 * @returns {promise.Promise<ProtractorBrowser>}
+	 */
+	restartBrowser() {
+		return browser.restart();
+	}
+	/**
 	 * Disable Angular (for non-Angular pages or if you encounter problems with Angular lifecycle)
 	 * @return {promise.Promise<boolean>}
 	 */

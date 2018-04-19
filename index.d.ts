@@ -240,6 +240,11 @@ export interface BetterProtractorService {
 	 */
 	pressTab(count?: number);
 	/**
+	 * Restart the browser. Beware that you need to call disableAngular() again if your web page is running not Angular.
+	 * @returns {promise.Promise<ProtractorBrowser>}
+	 */
+	restartBrowser();
+	/**
 	 * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
 	 * @return {ProtractorBrowser}
 	 */

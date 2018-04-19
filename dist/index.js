@@ -431,6 +431,13 @@ var BetterProtractorService = /** @class */ (function () {
         });
     };
     /**
+     * Restart the browser. Beware that you need to call disableAngular() again if your web page is running not Angular.
+     * @returns {promise.Promise<ProtractorBrowser>}
+     */
+    BetterProtractorService.prototype.restartBrowser = function () {
+        return protractor_1.browser.restart();
+    };
+    /**
      * Disable Angular (for non-Angular pages or if you encounter problems with Angular lifecycle)
      * @return {promise.Promise<boolean>}
      */
