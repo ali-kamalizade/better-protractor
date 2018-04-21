@@ -14,13 +14,15 @@ However, Protractor (and therefore *better-protractor*) can be used on any kind 
 - Get browser cookies
 - Press mouse buttons and keyboard keys
 - Fill and clear input fields
-- Get DOM properties of elements
+- Get DOM properties and style attributes of elements
 - Responsiveness: Adjust your window to simulate any device (tablet, smartphone, laptop)
 - Check if elements exist / are visible
 - Submit forms
+- Take screenshots of web pages
 - Get the number of elements on a web page by CSS query
 - Get the size of any element
 - Access the underlying Protractor API
+- And many more useful methods at your disposal
 
 [Read this article if you want to learn more about end-to-end testing in general.](https://medium.freecodecamp.org/why-end-to-end-testing-is-important-for-your-team-cb7eb0ec1504)
 

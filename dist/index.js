@@ -449,15 +449,52 @@ var BetterProtractorService = /** @class */ (function () {
         });
     };
     /**
-     * Take a screenshot and save it.
-     * TODO Check if this works for other users
-     * @returns {any}
+     * Take a screenshot and save it in the specified directory.
+     * @param {string} filename if not provided, then the browser title + current date will be used
+     * @param {string} directory if not provided, then a directory called better-protractor-screenshots will be created and used for all screenshots
+     * @return {Promise<any>}
      */
-    BetterProtractorService.prototype.screenshot = function () {
-        return protractor_1.browser.takeScreenshot().then(function (screenshot) {
-            var stream = fs.createWriteStream('protractor.png');
-            stream.write(new Buffer(screenshot, 'base64'));
-            stream.end();
+    BetterProtractorService.prototype.screenshot = function (filename, directory) {
+        if (directory === void 0) { directory = './better-protractor-screenshots'; }
+        return __awaiter(this, void 0, void 0, function () {
+            var fileExtension, forbiddenChars, _i, forbiddenChars_1, char;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        fileExtension = ['.png', '.jpg', '.jpeg', '.tiff'];
+                        if (!!filename) return [3 /*break*/, 2];
+                        return [4 /*yield*/, this.getBrowserTitle()];
+                    case 1:
+                        filename = (_a.sent()) + ' - ' + new Date().toLocaleDateString();
+                        _a.label = 2;
+                    case 2:
+                        forbiddenChars = ['<', '>', ':', '"', '/', '\\', '|', '?', '*'];
+                        for (_i = 0, forbiddenChars_1 = forbiddenChars; _i < forbiddenChars_1.length; _i++) {
+                            char = forbiddenChars_1[_i];
+                            if (filename.indexOf(char) > -1) {
+                                filename = filename.replace(char, '');
+                            }
+                        }
+                        // append default extension if none is set yet
+                        if (!filename.endsWith(fileExtension[0]) && !filename.endsWith(fileExtension[1]) && !filename.endsWith(fileExtension[2]) && !filename.endsWith(fileExtension[3])) {
+                            filename += fileExtension[0];
+                        }
+                        return [2 /*return*/, protractor_1.browser.takeScreenshot().then(function (screenshot) {
+                                // create directory if it does not exist and store screenshot there
+                                try {
+                                    if (!fs.existsSync(directory)) {
+                                        fs.mkdirSync(directory);
+                                    }
+                                    var stream = fs.createWriteStream(directory + '/' + filename);
+                                    stream.write(new Buffer(screenshot, 'base64'));
+                                    stream.end();
+                                }
+                                catch (e) {
+                                    console.error(e);
+                                }
+                            })];
+                }
+            });
         });
     };
     /**

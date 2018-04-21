@@ -4,7 +4,7 @@ require ("protractor"); // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SP
 const {SpecReporter} = require('jasmine-spec-reporter');
 
 const baseUrl = 'https://sedeo.net/'; /* Live testing*/
-const timeout = baseUrl.indexOf('https://') === -1? 60000 : 20000;
+const timeout = baseUrl.indexOf('https://') === -1? 60000 : 25000;
 
 exports.config = {
 	allScriptsTimeout: timeout,
@@ -14,8 +14,9 @@ exports.config = {
 	],
 	capabilities: {
 		'browserName': 'chrome',
+		// disable "chrome is being controlled by automated software"
 		chromeOptions: {
-			args: []
+			args: ['disable-infobars=true']
 		}
 	},
 	directConnect: true,

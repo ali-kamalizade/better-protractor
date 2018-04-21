@@ -261,11 +261,12 @@ export interface BetterProtractorService {
 	 */
 	getProtractorExpectedConditions();
 	/**
-	 * Take a screenshot and save it.
-	 * TODO Check if this works for other users
-	 * @returns {any}
+	 * Take a screenshot and save it in the specified directory.
+	 * @param {string} filename if not provided, then the browser title + current date will be used
+	 * @param {string} directory if not provided, then a directory called better-protractor-screenshots will be created and used for all screenshots
+	 * @return {Promise<any>}
 	 */
-	screenshot();
+	screenshot(filename?: string, directory?: string);
 	/**
 	 * Restart the browser. Beware that you need to call disableAngular() again if your web page is running not Angular.
 	 * @returns {promise.Promise<ProtractorBrowser>}

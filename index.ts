@@ -232,7 +232,7 @@ export class BetterProtractorService {
 		if (!url) {
 			url = await this.getUrl();
 		}
-		if(Array.isArray(contains)) {
+		if (Array.isArray(contains)) {
 			return (contains.indexOf(url) !== -1);
 		}
 		else {
@@ -382,15 +382,39 @@ export class BetterProtractorService {
 		return protractor.ExpectedConditions;
 	}
 	/**
-	 * Take a screenshot and save it.
-	 * TODO Check if this works for other users
-	 * @returns {any}
+	 * Take a screenshot and save it in the specified directory.
+	 * @param {string} filename if not provided, then the browser title + current date will be used
+	 * @param {string} directory if not provided, then a directory called better-protractor-screenshots will be created and used for all screenshots
+	 * @return {Promise<any>}
 	 */
-	screenshot() {
+	async screenshot(filename?: string, directory: string = './better-protractor-screenshots') {
+		const fileExtension: string [] = ['.png', '.jpg', '.jpeg', '.tiff'];
+		if (!filename) {
+			filename = (await this.getBrowserTitle()) + ' - ' + new Date().toLocaleDateString();
+		}
+		// delete forbidden characters if present in file name
+		const forbiddenChars: string[] = ['<', '>', ':', '"', '/', '\\', '|', '?', '*'];
+		for (let char of forbiddenChars) {
+			if (filename.indexOf(char) > -1) {
+				filename = filename.replace(char, '');
+			}
+		}
+		// append default extension if none is set yet
+		if (!filename.endsWith(fileExtension[0]) && !filename.endsWith(fileExtension[1]) && !filename.endsWith(fileExtension[2]) && !filename.endsWith(fileExtension[3])) {
+			filename += fileExtension[0];
+		}
 		return browser.takeScreenshot().then((screenshot: string) => {
-			const stream = fs.createWriteStream('protractor.png');
-			stream.write(new Buffer(screenshot, 'base64'));
-			stream.end();
+			// create directory if it does not exist and store screenshot there
+			try {
+				if (!fs.existsSync(directory)){
+					fs.mkdirSync(directory);
+				}
+				const stream = fs.createWriteStream(directory + '/' + filename);
+				stream.write(new Buffer(screenshot, 'base64'));
+				stream.end();
+			} catch (e) {
+				console.error(e);
+			}
 		});
 	}
 	/**

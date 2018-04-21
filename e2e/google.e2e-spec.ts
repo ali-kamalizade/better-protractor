@@ -6,10 +6,12 @@ const UtilityService = require("../index.ts");
 const service: BetterProtractorService = new UtilityService.BetterProtractorService(false);
 
 describe('Google', () => {
-	it('should look for sedeo', async () => {
+	it('should navigate to Google', async () => {
 		service.navigateToRoute('https://google.de');
 		service.pauseBrowserTemporarily(500);
 		expect(await service.checkIfRouteContains('google', await service.getUrl())).toBe(true);
+	});
+	it('should look for sedeo and find results', async () => {
 		// demonstrate access of Protractor API
 		expect(await service.getAttributeFromDomElement(service.getProtractorElementFinder(service.getProtractorBy().css('#lst-ib')), 'class')).toContain('gsfi');
 		service.fillInput('#lst-ib', "sedeo");
@@ -18,6 +20,7 @@ describe('Google', () => {
 		service.pauseBrowserTemporarily(500);
 		service.pressKey(Key.ENTER);
 		service.pauseBrowserTemporarily(1000);
+		service.screenshot();
 		expect(await service.getDomElementsCount('.g')).toBeGreaterThan(0);
 	});
 });

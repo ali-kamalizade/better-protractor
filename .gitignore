@@ -9,4 +9,4 @@
 /dist/e2e
 debug.log
 *.iml
-*protractor.png
+better-protractor-screenshots/*
