@@ -268,6 +268,18 @@ export interface BetterProtractorService {
 	 */
 	screenshot(filename?: string, directory?: string);
 	/**
+	 * Get localStorage item. If none is found, then null is returned.
+	 * @param {string} item key in localStorage
+	 * @return {!promise.Promise<string>|promise.Promise<string>}
+	 */
+	getLocalStorageItem(item: string);
+	/**
+	 * Get sessionStorage item. If none is found, then null is returned.
+	 * @param {string} item key in sessionStorage
+	 * @return {!promise.Promise<string>|promise.Promise<string>}
+	 */
+	getSessionStorageItem(item: string);
+	/**
 	 * Restart the browser. Beware that you need to call disableAngular() again if your web page is running not Angular.
 	 * @returns {promise.Promise<ProtractorBrowser>}
 	 */

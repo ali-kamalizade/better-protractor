@@ -11,7 +11,7 @@ However, Protractor (and therefore *better-protractor*) can be used on any kind 
 - Navigate to any web page (with relative path support for Angular)
 - Click any element (query by ID, CSS, Xpath, HTML tag)
 - Scroll to a specific element
-- Get browser cookies
+- Get browser cookies, localStorage and sessionStorage
 - Press mouse buttons and keyboard keys
 - Fill and clear input fields
 - Get DOM properties and style attributes of elements

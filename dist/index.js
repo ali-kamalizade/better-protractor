@@ -347,6 +347,22 @@ var BetterProtractorService = /** @class */ (function () {
         return protractor_1.browser.executeScript('return window.navigator.language;');
     };
     /**
+     * Get localStorage item. If none is found, then null is returned.
+     * @param {string} item key in localStorage
+     * @return {!promise.Promise<string>|promise.Promise<string>}
+     */
+    BetterProtractorService.prototype.getLocalStorageItem = function (item) {
+        return protractor_1.browser.executeScript('return localStorage.getItem("' + item + '");');
+    };
+    /**
+     * Get sessionStorage item. If none is found, then null is returned.
+     * @param {string} item key in sessionStorage
+     * @return {!promise.Promise<string>|promise.Promise<string>}
+     */
+    BetterProtractorService.prototype.getSessionStorageItem = function (item) {
+        return protractor_1.browser.executeScript('return sessionStorage.getItem("' + item + '");');
+    };
+    /**
      * Scroll to a DOM element
      * @param selector {string} CSS query
      * @returns {promise.Promise<void>}
@@ -465,7 +481,7 @@ var BetterProtractorService = /** @class */ (function () {
                         if (!!filename) return [3 /*break*/, 2];
                         return [4 /*yield*/, this.getBrowserTitle()];
                     case 1:
-                        filename = (_a.sent()) + ' - ' + new Date().toLocaleDateString();
+                        filename = (_a.sent()) + ' -- ' + new Date().toLocaleDateString();
                         _a.label = 2;
                     case 2:
                         forbiddenChars = ['<', '>', ':', '"', '/', '\\', '|', '?', '*'];

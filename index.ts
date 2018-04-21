@@ -297,6 +297,22 @@ export class BetterProtractorService {
 		return browser.executeScript('return window.navigator.language;');
 	}
 	/**
+	 * Get localStorage item. If none is found, then null is returned.
+	 * @param {string} item key in localStorage
+	 * @return {!promise.Promise<string>|promise.Promise<string>}
+	 */
+	getLocalStorageItem(item: string) {
+		return browser.executeScript('return localStorage.getItem("' + item  + '");');
+	}
+	/**
+	 * Get sessionStorage item. If none is found, then null is returned.
+	 * @param {string} item key in sessionStorage
+	 * @return {!promise.Promise<string>|promise.Promise<string>}
+	 */
+	getSessionStorageItem(item: string) {
+		return browser.executeScript('return sessionStorage.getItem("' + item  + '");');
+	}
+	/**
 	 * Scroll to a DOM element
 	 * @param selector {string} CSS query
 	 * @returns {promise.Promise<void>}
@@ -390,7 +406,7 @@ export class BetterProtractorService {
 	async screenshot(filename?: string, directory: string = './better-protractor-screenshots') {
 		const fileExtension: string [] = ['.png', '.jpg', '.jpeg', '.tiff'];
 		if (!filename) {
-			filename = (await this.getBrowserTitle()) + ' - ' + new Date().toLocaleDateString();
+			filename = (await this.getBrowserTitle()) + ' -- ' + new Date().toLocaleDateString();
 		}
 		// delete forbidden characters if present in file name
 		const forbiddenChars: string[] = ['<', '>', ':', '"', '/', '\\', '|', '?', '*'];

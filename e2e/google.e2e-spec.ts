@@ -20,7 +20,9 @@ describe('Google', () => {
 		service.pauseBrowserTemporarily(500);
 		service.pressKey(Key.ENTER);
 		service.pauseBrowserTemporarily(1000);
-		service.screenshot();
 		expect(await service.getDomElementsCount('.g')).toBeGreaterThan(0);
+	});
+	it('take a screenshot of the result page', async () => {
+		service.screenshot();
 	});
 });
