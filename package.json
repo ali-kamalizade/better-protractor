@@ -1,9 +1,11 @@
 {
 	"name": "better-protractor",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "Make end-to-end testing with Protractor great (again) - with better-protractor",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"init-jasmine": "jasmine init",
+		"jasmine-examples": "jasmine examples",
+		"test": "ts-node node_modules/jasmine/bin/jasmine",
 		"webdriver-start": "webdriver-manager start",
 		"webdriver-update": "webdriver-manager update",
 		"protractor": "protractor"
@@ -15,6 +17,7 @@
 		"@types/core-js": "^0.9.46",
 		"@types/jasmine": "^2.8.6",
 		"@types/node": "^7.0.55",
+		"jasmine": "^2.99.0",
 		"jasmine-core": "^2.99.1",
 		"jasmine-spec-reporter": "^4.2.1",
 		"protractor": "^5.3.1",
@@ -26,9 +29,9 @@
 		"node": ">=7.0.0"
 	},
 	"bugs": "https://github.com/ali-kamalizade/better-protractor/issues",
-	"repository" : {
-		"type" : "git",
-		"url" : "https://github.com/ali-kamalizade/better-protractor.git"
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ali-kamalizade/better-protractor.git"
 	},
 	"keywords": [
 		"Protractor",
