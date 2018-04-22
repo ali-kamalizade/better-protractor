@@ -29,7 +29,7 @@ However, Protractor (and therefore *better-protractor*) can be used on any kind 
 
 ## Installation:
 1. If you do not have Protractor and Webdriver setup yet, then please do so: [Protractor setup](http://www.protractortest.org/#/tutorial#setup). *better-protractor* relies on Protractor in order to work.
-2. Install better-protractor: ```npm install better-protractor``` or ```npm install better-protractor --dev```
+2. Install better-protractor with NPM: ```npm install better-protractor``` or ```npm install better-protractor --only=dev```
 
 ## Usage:
 - **Recommended (TypeScript)**: Create a custom class which extends BetterProtractorService. You can override the default methods and add your own custom variables and methods.
@@ -38,7 +38,7 @@ const service: CustomTestService = new CustomTestService();
 ```
 - You can also directly use *better-protractor* in TypeScript if the provided methods suit your needs or if you do not want to let your custom page object class inherit.
 ```javascript
-const service: EndToEndTestingService = new EndToEndTestingService();
+const service: BetterProtractorService = new BetterProtractorService();
 ```
 - You can also use *better-protractor* in Javascript.
 ```javascript
