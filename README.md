@@ -1,5 +1,6 @@
 # *better-protractor* - no more excuses for not writing tests
 
+[![npm version](https://badge.fury.io/js/better-protractor.svg)](https://badge.fury.io/js/better-protractor)
 [![Build Status](https://travis-ci.org/ali-kamalizade/better-protractor.svg?branch=master)](https://travis-ci.org/ali-kamalizade/better-protractor)
 
 Test everything you can test with **better-protractor** which relies on Protractor, the awesome end-to-end-testing framework made by the Angular team.
