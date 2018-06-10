@@ -27,6 +27,8 @@ However, Protractor (and therefore *better-protractor*) can be used on any kind 
 
 [Read this article if you want to learn more about end-to-end testing in general.](https://medium.freecodecamp.org/why-end-to-end-testing-is-important-for-your-team-cb7eb0ec1504)
 
+[I also wrote an article about software quality assurance and testing in general.](https://medium.com/@alirak94/why-software-qa-matters-not-only-for-testers-and-how-to-get-into-it-65669f77e746)
+
 ## Installation:
 1. If you do not have Protractor and Webdriver setup yet, then please do so: [Protractor setup](http://www.protractortest.org/#/tutorial#setup). *better-protractor* relies on Protractor in order to work.
 2. Install better-protractor with NPM: ```npm install better-protractor``` or ```npm install better-protractor --only=dev```
