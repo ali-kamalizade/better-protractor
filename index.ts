@@ -460,6 +460,14 @@ export class BetterProtractorService {
 		return (url? url : (await this.getUrl())).indexOf('https://') !== -1;
 	}
 	/**
+	 *
+	 * @param {string} script
+	 * @return {any}
+	 */
+	executeScript(script: string) {
+		return browser.executeScript(script);
+	}
+	/**
 	 * Restart the browser. Beware that you need to call disableAngular() again if your web page is running not Angular.
 	 * @returns {promise.Promise<ProtractorBrowser>}
 	 */

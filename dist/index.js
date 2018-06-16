@@ -569,6 +569,14 @@ var BetterProtractorService = /** @class */ (function () {
         });
     };
     /**
+     *
+     * @param {string} script
+     * @return {any}
+     */
+    BetterProtractorService.prototype.executeScript = function (script) {
+        return protractor_1.browser.executeScript(script);
+    };
+    /**
      * Restart the browser. Beware that you need to call disableAngular() again if your web page is running not Angular.
      * @returns {promise.Promise<ProtractorBrowser>}
      */

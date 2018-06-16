@@ -259,6 +259,11 @@ export interface BetterProtractorService {
 	 */
 	getBrowserTitle();
 	/**
+	 *
+	 * @param {string} script
+	 */
+	executeScript(script: string);
+	/**
 	 * Close the current window.
 	 * @returns {any}
 	 */
