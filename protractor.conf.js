@@ -9,7 +9,7 @@ const timeout = baseUrl.indexOf('https://') === -1? 60000 : 25000;
 exports.config = {
 	allScriptsTimeout: timeout,
 	specs: [
-		'./e2e/**/*.e2e-spec-ts.ts',
+		'./e2e/**/*.e2e-spec.ts',
 		'./e2e/**/*.e2e-spec.js'
 	],
 	capabilities: {
