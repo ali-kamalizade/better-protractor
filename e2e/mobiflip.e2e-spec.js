@@ -11,7 +11,7 @@ describe('Mobiflip', () => {
 		expect(await service.checkIfRouteContains('mobiflip')).toBe(true);
 	});
 	it('should open first article', async() => {
-		service.clickElementByCss('.blog-widget-list > .infinite-post:first-child');
+		service.clickElementByCss('.blog-widget-list > .infinite-post:first-child a');
 		service.pauseBrowserTemporarily(1000);
 	});
 	it('should scroll to sharing buttons', async() => {
