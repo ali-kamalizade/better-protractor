@@ -38,7 +38,9 @@ export interface BetterProtractorService {
 	 */
 	disableAngular(): any;
 	/**
-	 * Don't let Protractor close the browser after execution for a specific time. You can use this as an alternative in case pauseBrowser() does not work.
+	 * Don't let Protractor close the browser after execution for a specific time.
+	 * You can use this as an alternative in case pauseBrowser() does not work.
+	 * Use this to wait for things to initialize (e.g. animated items).
 	 * @param time {number} in milliseconds
 	 */
 	pauseBrowserTemporarily(time: number): any;
@@ -177,6 +179,18 @@ export interface BetterProtractorService {
 	 * @param element {WebElement}
 	 */
 	clickWebElement(element: WebElement): any;
+	/**
+	 * Hover over an element by CSS
+	 * @param css {string}
+	 * @return Promise
+	 */
+	hoverElementByCss(css: string);
+	/**
+	 * Hover over an element
+	 * @param element
+	 * @return Promise
+	 */
+	hoverElement(element: string): any;
 	/**
 	 * Fill a <input> or <textarea> with content
 	 * @param selector {string}

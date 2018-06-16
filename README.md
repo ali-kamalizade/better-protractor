@@ -14,6 +14,7 @@ However, Protractor (and therefore *better-protractor*) can be used on any kind 
 - Scroll to a specific element
 - Get browser cookies, localStorage and sessionStorage
 - Press mouse buttons and keyboard keys
+- Hover element
 - Fill and clear input fields
 - Get DOM properties and style attributes of elements
 - Responsiveness: Adjust your window to simulate any device (tablet, smartphone, laptop)

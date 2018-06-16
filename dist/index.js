@@ -188,6 +188,36 @@ var BetterProtractorService = /** @class */ (function () {
         return protractor_1.browser.actions().mouseMove(element).click().perform();
     };
     /**
+     * Hover over an element by CSS
+     * @param css {string}
+     * @return Promise
+     */
+    BetterProtractorService.prototype.hoverElementByCss = function (css) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _b = (_a = protractor_1.browser.actions()).mouseMove;
+                        return [4 /*yield*/, this.getDomElementByCss(css)];
+                    case 1: return [2 /*return*/, _b.apply(_a, [(_c.sent())]).perform()];
+                }
+            });
+        });
+    };
+    /**
+     * Hover over an element
+     * @param element
+     * @return Promise
+     */
+    BetterProtractorService.prototype.hoverElement = function (element) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, protractor_1.browser.actions().mouseMove(element).perform()];
+            });
+        });
+    };
+    /**
      * Press key on keyboard (e.g. TAB or ENTER)
      * @param key {string}
      */
@@ -209,7 +239,9 @@ var BetterProtractorService = /** @class */ (function () {
         return protractor_1.browser.pause();
     };
     /**
-     * Don't let Protractor close the browser after execution for a specific time. You can use this as an alternative in case pauseBrowser() does not work.
+     * Don't let Protractor close the browser after execution for a specific time.
+     * You can use this as an alternative in case pauseBrowser() does not work.
+     * Use this to wait for things to initialize (e.g. animated items).
      * @param time {number} in milliseconds
      */
     BetterProtractorService.prototype.pauseBrowserTemporarily = function (time) {

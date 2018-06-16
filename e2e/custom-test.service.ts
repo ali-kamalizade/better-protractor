@@ -10,7 +10,7 @@ export class CustomTestService extends BetterProtractorService {
 	}
 
 	navigateToRoute(route: string) {
-		console.log("overridden method", route);
+		console.log('overridden method', route);
 		return super.navigateToRoute(route);
 	}
 

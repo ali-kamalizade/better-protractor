@@ -1,4 +1,4 @@
-import {browser, by, element, protractor, ProtractorBy} from "protractor"; // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
+import {browser, by, element, ElementFinder, protractor, ProtractorBy} from 'protractor'; // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
 import {Key} from "selenium-webdriver";
 import * as fs from "fs";
 
@@ -151,6 +151,22 @@ export class BetterProtractorService {
 		return browser.actions().mouseMove(element).click().perform();
 	}
 	/**
+	 * Hover over an element by CSS
+	 * @param css {string}
+	 * @return Promise
+	 */
+	async hoverElementByCss(css: string) {
+		return browser.actions().mouseMove((await this.getDomElementByCss(css))).perform();
+	}
+	/**
+	 * Hover over an element
+	 * @param element
+	 * @return Promise
+	 */
+	async hoverElement(element: ElementFinder) {
+		return browser.actions().mouseMove(element).perform();
+	}
+	/**
 	 * Press key on keyboard (e.g. TAB or ENTER)
 	 * @param key {string}
 	 */
@@ -172,7 +188,9 @@ export class BetterProtractorService {
 		return browser.pause();
 	}
 	/**
-	 * Don't let Protractor close the browser after execution for a specific time. You can use this as an alternative in case pauseBrowser() does not work.
+	 * Don't let Protractor close the browser after execution for a specific time.
+	 * You can use this as an alternative in case pauseBrowser() does not work.
+	 * Use this to wait for things to initialize (e.g. animated items).
 	 * @param time {number} in milliseconds
 	 */
 	pauseBrowserTemporarily(time: number): any {
