@@ -1,0 +1,9 @@
+e2e
+spec
+.idea
+better-protractor-screenshots
+*.log
+*.iml
+*.yml
+tsconfig.json
+.editorconfig

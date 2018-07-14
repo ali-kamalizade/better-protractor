@@ -7,6 +7,7 @@
 *.js.map
 *.service.js
 /dist/e2e
+/dist/spec
 debug.log
 *.iml
 better-protractor-screenshots/*
