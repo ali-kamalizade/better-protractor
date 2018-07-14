@@ -6,6 +6,10 @@ const {SpecReporter} = require('jasmine-spec-reporter');
 const baseUrl = 'https://sedeo.net/'; /* Live testing*/
 const timeout = baseUrl.indexOf('https://') === -1? 60000 : 25000;
 
+//const UtilityService = require('./index.ts');
+const UtilityService = require('./dist/index.js');
+const service = new UtilityService.BetterProtractorService();
+
 exports.config = {
 	allScriptsTimeout: timeout,
 	specs: [
@@ -14,9 +18,9 @@ exports.config = {
 	],
 	capabilities: {
 		'browserName': 'chrome',
-		// disable "chrome is being controlled by automated software"
+		// disable "Chrome is being controlled by automated software"
 		chromeOptions: {
-			args: ['disable-infobars=true']
+			args: [... service.chromeDriverHideMessages]
 		}
 	},
 	directConnect: true,
@@ -35,9 +39,6 @@ exports.config = {
 	},
 	onPrepare() {
 		jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
-		//const UtilityService = require('./index.ts');
-		const UtilityService = require('./dist/index.js');
-		const service = new UtilityService.BetterProtractorService();
 		// for better testing: disable Angular on non-Angular page and maximize window
 		service.disableAngular();
 		service.maximizeWindow();

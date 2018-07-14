@@ -8,6 +8,19 @@ import {IWebDriverOptionsCookie, WebElement} from "selenium-webdriver";
  */
 export interface BetterProtractorService {
 
+	/**
+	 * You need to set this in capabilities.chromeOptions.args.
+	 * Hides Google Cloud printer notificationa and "Chrome is being controlled by automated software" alert
+	 * @type {string[]}
+	 */
+	chromeDriverHideMessages: string[];
+	/**
+	 * You need to set this in capabilities.chromeOptions.args.
+	 * Disable GPU as it sometimes can lead to unexpected behavior
+	 * @type {string}
+	 */
+	chromeDriverDisableGpu: string
+
 	new(isDisabled?: boolean): BetterProtractorService;
 
 	/**

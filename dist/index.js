@@ -49,6 +49,21 @@ var BetterProtractorService = /** @class */ (function () {
      */
     function BetterProtractorService(isDisabled) {
         if (isDisabled === void 0) { isDisabled = false; }
+        /**
+         * You need to set this in capabilities.chromeOptions.args.
+         * Hides Google Cloud printer notificationa and "Chrome is being controlled by automated software" alert
+         * @type {string[]}
+         */
+        this.chromeDriverHideMessages = [
+            '--disable-infobars',
+            '--disable-device-discovery-notifications'
+        ];
+        /**
+         * You need to set this in capabilities.chromeOptions.args.
+         * Disable GPU as it sometimes can lead to unexpected behavior
+         * @type {string}
+         */
+        this.chromeDriverDisableGpu = '--disable-gpu';
         if (isDisabled) {
             this.disableAngular();
         }

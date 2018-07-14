@@ -10,6 +10,22 @@ import * as fs from "fs";
 export class BetterProtractorService {
 
 	/**
+	 * You need to set this in capabilities.chromeOptions.args.
+	 * Hides Google Cloud printer notificationa and "Chrome is being controlled by automated software" alert
+	 * @type {string[]}
+	 */
+	chromeDriverHideMessages: string[] = [
+		'--disable-infobars',
+		'--disable-device-discovery-notifications'
+	];
+	/**
+	 * You need to set this in capabilities.chromeOptions.args.
+	 * Disable GPU as it sometimes can lead to unexpected behavior
+	 * @type {string}
+	 */
+	chromeDriverDisableGpu: string = '--disable-gpu';
+
+	/**
 	 * @param {boolean} isDisabled if Angular change detection should be disabled
 	 */
 	constructor(isDisabled: boolean = false){
