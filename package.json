@@ -9,7 +9,7 @@
 		"webdriver-start": "webdriver-manager start &",
 		"webdriver-update": "webdriver-manager update",
 		"protractor": "protractor",
-		"ci-e2e": "protractor --capabilities.chromeOptions.args=--headless protractor.conf.js"
+		"ci-e2e": "protractor --capabilities.chromeOptions.args=--headless --capabilities.chromeOptions.args=--no-sandbox protractor.conf.js"
 	},
 	"main": "dist/index.js",
 	"author": "Ali Kamalizade",

@@ -8,9 +8,7 @@ cache:
     - "node_modules"
 script:
   - npm test
-  - npm install -g protractor
-  # todo Install Chrome headless and run Protractor
+   # todo Install Chrome headless and run Protractor
   - npm run webdriver-update
-  - npm run webdriver-start
   - npm run webdriver-start
   - npm run ci-e2e
