@@ -2,6 +2,8 @@
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 require ("protractor"); // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
 const {SpecReporter} = require('jasmine-spec-reporter');
+// todo Chrome for CI
+process.env.CHROME_BIN = process.env.CHROME_BIN || require('puppeteer').executablePath();
 
 const baseUrl = 'https://sedeo.net/'; /* Live testing*/
 const timeout = baseUrl.indexOf('https://') === -1? 60000 : 25000;
@@ -20,7 +22,8 @@ exports.config = {
 		'browserName': 'chrome',
 		// disable "Chrome is being controlled by automated software"
 		chromeOptions: {
-			args: [... service.chromeDriverHideMessages]
+			args: [... service.chromeDriverHideMessages],
+			binary: process.env.CHROME_BIN
 		}
 	},
 	directConnect: true,
