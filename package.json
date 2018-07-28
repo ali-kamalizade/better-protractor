@@ -6,7 +6,7 @@
 		"init-jasmine": "jasmine init",
 		"jasmine-examples": "jasmine examples",
 		"test": "ts-node node_modules/jasmine/bin/jasmine",
-		"webdriver-start": "webdriver-manager start",
+		"webdriver-start": "webdriver-manager start &",
 		"webdriver-update": "webdriver-manager update",
 		"protractor": "protractor",
 		"ci-e2e": "protractor --capabilities.chromeOptions.args=--headless protractor.conf.js"
