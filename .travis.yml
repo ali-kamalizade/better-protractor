@@ -12,4 +12,5 @@ script:
   # todo Install Chrome headless and run Protractor
   - npm run webdriver-update
   - npm run webdriver-start
+  - npm run webdriver-start
   - npm run ci-e2e
