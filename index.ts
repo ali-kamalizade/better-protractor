@@ -1,6 +1,6 @@
 import {browser, by, element, ElementFinder, protractor, ProtractorBy} from 'protractor'; // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
-import {Key} from "selenium-webdriver";
-import * as fs from "fs";
+import {Key} from 'selenium-webdriver';
+import * as fs from 'fs';
 
 /**
  * Provides helper methods which allow for testing common test cases.
@@ -34,7 +34,7 @@ export class BetterProtractorService {
 		}
 	}
 	/**
-	 * Navigate to a route.
+	 * Navigate to a route or a URL.
 	 * @returns {wdpromise.Promise<any>}
 	 * @param path {string}
 	 */
@@ -328,7 +328,7 @@ export class BetterProtractorService {
 	 * @return {!promise.Promise<string>|promise.Promise<string>}
 	 */
 	getLanguage() {
-		return browser.executeScript('return window.navigator.language;');
+		return this.executeScript('return window.navigator.language;');
 	}
 	/**
 	 * Get localStorage item. If none is found, then null is returned.
@@ -336,7 +336,7 @@ export class BetterProtractorService {
 	 * @return {!promise.Promise<string>|promise.Promise<string>}
 	 */
 	getLocalStorageItem(item: string) {
-		return browser.executeScript('return localStorage.getItem("' + item  + '");');
+		return this.executeScript('return localStorage.getItem("' + item  + '");');
 	}
 	/**
 	 * Get sessionStorage item. If none is found, then null is returned.
@@ -344,7 +344,7 @@ export class BetterProtractorService {
 	 * @return {!promise.Promise<string>|promise.Promise<string>}
 	 */
 	getSessionStorageItem(item: string) {
-		return browser.executeScript('return sessionStorage.getItem("' + item  + '");');
+		return this.executeScript('return sessionStorage.getItem("' + item  + '");');
 	}
 	/**
 	 * Scroll to a DOM element
@@ -472,15 +472,15 @@ export class BetterProtractorService {
 	 * @param {string} url if no URL is provided, then the current URL will be used
 	 * @returns {Promise<boolean>}
 	 */
-	async isHttps(url?: string) {
+	async isHttps(url?: string): Promise<boolean> {
 		return (url? url : (await this.getUrl())).indexOf('https://') !== -1;
 	}
 	/**
-	 *
-	 * @param {string} script
-	 * @return {any}
+	 * Execute a script in the browser
+	 * @param {string | Function} script
+	 * @return {Promise<any>}
 	 */
-	executeScript(script: string) {
+	executeScript(script: string | Function) {
 		return browser.executeScript(script);
 	}
 	/**

@@ -30,7 +30,7 @@ export interface BetterProtractorService {
 	 */
 	getUrl(useDriver?: boolean): string;
 	/**
-	 * Navigate to a route.
+	 * Navigate to a route or to a URL.
 	 * @returns {wdpromise.Promise<any>}
 	 * @param path {string}
 	 */
@@ -273,9 +273,9 @@ export interface BetterProtractorService {
 	getBrowserTitle();
 	/**
 	 *
-	 * @param {string} script
+	 * @param {string | Function} script
 	 */
-	executeScript(script: string);
+	executeScript(script: string | Function);
 	/**
 	 * Close the current window.
 	 * @returns {any}

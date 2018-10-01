@@ -69,7 +69,7 @@ var BetterProtractorService = /** @class */ (function () {
         }
     }
     /**
-     * Navigate to a route.
+     * Navigate to a route or a URL.
      * @returns {wdpromise.Promise<any>}
      * @param path {string}
      */
@@ -391,7 +391,7 @@ var BetterProtractorService = /** @class */ (function () {
      * @return {!promise.Promise<string>|promise.Promise<string>}
      */
     BetterProtractorService.prototype.getLanguage = function () {
-        return protractor_1.browser.executeScript('return window.navigator.language;');
+        return this.executeScript('return window.navigator.language;');
     };
     /**
      * Get localStorage item. If none is found, then null is returned.
@@ -399,7 +399,7 @@ var BetterProtractorService = /** @class */ (function () {
      * @return {!promise.Promise<string>|promise.Promise<string>}
      */
     BetterProtractorService.prototype.getLocalStorageItem = function (item) {
-        return protractor_1.browser.executeScript('return localStorage.getItem("' + item + '");');
+        return this.executeScript('return localStorage.getItem("' + item + '");');
     };
     /**
      * Get sessionStorage item. If none is found, then null is returned.
@@ -407,7 +407,7 @@ var BetterProtractorService = /** @class */ (function () {
      * @return {!promise.Promise<string>|promise.Promise<string>}
      */
     BetterProtractorService.prototype.getSessionStorageItem = function (item) {
-        return protractor_1.browser.executeScript('return sessionStorage.getItem("' + item + '");');
+        return this.executeScript('return sessionStorage.getItem("' + item + '");');
     };
     /**
      * Scroll to a DOM element
@@ -584,9 +584,9 @@ var BetterProtractorService = /** @class */ (function () {
         });
     };
     /**
-     *
-     * @param {string} script
-     * @return {any}
+     * Execute a script in the browser
+     * @param {string | Function} script
+     * @return {Promise<any>}
      */
     BetterProtractorService.prototype.executeScript = function (script) {
         return protractor_1.browser.executeScript(script);
