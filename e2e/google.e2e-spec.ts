@@ -6,7 +6,7 @@ const UtilityService = require("../index.ts");
 const service: BetterProtractorService = new UtilityService.BetterProtractorService(false);
 
 describe('Google', () => {
-	fit('should navigate to Google search', async () => {
+	it('should navigate to Google search', async () => {
 		await service.navigateToRoute('https://google.de');
 		service.pauseBrowserTemporarily(500);
 		expect(await service.checkIfRouteContains('google', await service.getUrl())).toBe(true);
