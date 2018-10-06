@@ -5,7 +5,7 @@ const service = new e2e.BetterProtractorService();
 
 describe('Mobiflip', () => {
 	it('should navigate to Mobiflip', async() => {
-		service.disableAngular();
+		await service.disableAngular();
 		await service.navigateToRoute('https://mobiflip.de');
 		await service.pauseBrowserTemporarily(500);
 		expect(await service.checkIfRouteContains('mobiflip')).toBe(true);

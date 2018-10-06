@@ -369,12 +369,12 @@ export class BetterProtractorService {
 	 * @returns {Promise<promise.Promise<void>>}
 	 */
 	async deleteCharsFromInput(selector: string, count?: number) {
-		this.clickElementByCss(selector);
+		await this.clickElementByCss(selector);
 		if (typeof count === 'number') {
 			let temp: number = 0;
 			while (temp < count - 1) {
-				this.pressKey(Key.BACK_SPACE);
-				this.pauseBrowserTemporarily(400);
+				await this.pressKey(Key.BACK_SPACE);
+				await this.pauseBrowserTemporarily(400);
 				temp++;
 			}
 			return this.pressKey(Key.BACK_SPACE);
@@ -388,12 +388,12 @@ export class BetterProtractorService {
 	 * @param {number} count how many times TAB key should be pressed. Otherwise, it will be pressed once.
 	 * @returns {promise.Promise<void>}
 	 */
-	pressTab(count?: number) {
+	async pressTab(count?: number) {
 		if (typeof count === 'number') {
 			let temp: number = 0;
 			while (temp < count - 1) {
-				this.pressKey(Key.TAB);
-				this.pauseBrowserTemporarily(400);
+				await this.pressKey(Key.TAB);
+				await this.pauseBrowserTemporarily(400);
 				temp++;
 			}
 			return this.pressKey(Key.TAB);

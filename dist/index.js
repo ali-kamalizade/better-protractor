@@ -435,20 +435,26 @@ var BetterProtractorService = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var temp;
             return __generator(this, function (_a) {
-                this.clickElementByCss(selector);
-                if (typeof count === 'number') {
-                    temp = 0;
-                    while (temp < count - 1) {
-                        this.pressKey(selenium_webdriver_1.Key.BACK_SPACE);
-                        this.pauseBrowserTemporarily(400);
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.clickElementByCss(selector)];
+                    case 1:
+                        _a.sent();
+                        if (!(typeof count === 'number')) return [3 /*break*/, 6];
+                        temp = 0;
+                        _a.label = 2;
+                    case 2:
+                        if (!(temp < count - 1)) return [3 /*break*/, 5];
+                        return [4 /*yield*/, this.pressKey(selenium_webdriver_1.Key.BACK_SPACE)];
+                    case 3:
+                        _a.sent();
+                        return [4 /*yield*/, this.pauseBrowserTemporarily(400)];
+                    case 4:
+                        _a.sent();
                         temp++;
-                    }
-                    return [2 /*return*/, this.pressKey(selenium_webdriver_1.Key.BACK_SPACE)];
+                        return [3 /*break*/, 2];
+                    case 5: return [2 /*return*/, this.pressKey(selenium_webdriver_1.Key.BACK_SPACE)];
+                    case 6: return [2 /*return*/, this.pressKey(selenium_webdriver_1.Key.BACK_SPACE)];
                 }
-                else {
-                    return [2 /*return*/, this.pressKey(selenium_webdriver_1.Key.BACK_SPACE)];
-                }
-                return [2 /*return*/];
             });
         });
     };
@@ -458,18 +464,29 @@ var BetterProtractorService = /** @class */ (function () {
      * @returns {promise.Promise<void>}
      */
     BetterProtractorService.prototype.pressTab = function (count) {
-        if (typeof count === 'number') {
-            var temp = 0;
-            while (temp < count - 1) {
-                this.pressKey(selenium_webdriver_1.Key.TAB);
-                this.pauseBrowserTemporarily(400);
-                temp++;
-            }
-            return this.pressKey(selenium_webdriver_1.Key.TAB);
-        }
-        else {
-            return this.pressKey(selenium_webdriver_1.Key.TAB);
-        }
+        return __awaiter(this, void 0, void 0, function () {
+            var temp;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!(typeof count === 'number')) return [3 /*break*/, 5];
+                        temp = 0;
+                        _a.label = 1;
+                    case 1:
+                        if (!(temp < count - 1)) return [3 /*break*/, 4];
+                        return [4 /*yield*/, this.pressKey(selenium_webdriver_1.Key.TAB)];
+                    case 2:
+                        _a.sent();
+                        return [4 /*yield*/, this.pauseBrowserTemporarily(400)];
+                    case 3:
+                        _a.sent();
+                        temp++;
+                        return [3 /*break*/, 1];
+                    case 4: return [2 /*return*/, this.pressKey(selenium_webdriver_1.Key.TAB)];
+                    case 5: return [2 /*return*/, this.pressKey(selenium_webdriver_1.Key.TAB)];
+                }
+            });
+        });
     };
     /**
      * Get the current web page title.

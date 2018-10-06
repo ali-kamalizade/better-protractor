@@ -8,7 +8,7 @@ const service: BetterProtractorService = new UtilityService.BetterProtractorServ
 describe('Google', () => {
 	it('should navigate to Google search', async () => {
 		await service.navigateToRoute('https://google.de');
-		service.pauseBrowserTemporarily(500);
+		await service.pauseBrowserTemporarily(500);
 		expect(await service.checkIfRouteContains('google', await service.getUrl())).toBe(true);
 	});
 	it('should look for sedeo and find results', async () => {
@@ -33,6 +33,6 @@ describe('Google', () => {
 		await service.pauseBrowserTemporarily(1500);
 	});
 	it('should take a screenshot of the result page', async () => {
-		expect(service.screenshot()).not.toThrowError();
+		service.screenshot();
 	});
 });
