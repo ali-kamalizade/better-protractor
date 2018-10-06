@@ -41,7 +41,6 @@ exports.config = {
 		});
 	},
 	onPrepare() {
-		console.log(process.argv0, isRunningInCi());
 		jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
 		// for better testing: disable Angular on non-Angular page and maximize window
 		service.disableAngular();
@@ -51,5 +50,6 @@ exports.config = {
 };
 // if running in Ci, additional chrome options will be added so Protractor can run in CI
 function isRunningInCi() {
-	return process.argv0.indexOf("C:\\") === -1;
+	const arg = process.argv0;
+	return arg.indexOf("C:\\") === -1 || arg === 'node';
 }
