@@ -64,6 +64,15 @@ var BetterProtractorService = /** @class */ (function () {
          * @type {string}
          */
         this.chromeDriverDisableGpu = '--disable-gpu';
+        /**
+         * Options for Chrome to be able to run in CI
+         * @type {string []}
+         */
+        this.chromeDriverCiOptions = [
+            '--headless',
+            '--disable-gpu',
+            '--no-sandbox'
+        ];
         if (isDisabled) {
             this.disableAngular();
         }
@@ -208,17 +217,7 @@ var BetterProtractorService = /** @class */ (function () {
      * @return Promise
      */
     BetterProtractorService.prototype.hoverElementByCss = function (css) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _b = (_a = protractor_1.browser.actions()).mouseMove;
-                        return [4 /*yield*/, this.getDomElementByCss(css)];
-                    case 1: return [2 /*return*/, _b.apply(_a, [(_c.sent())]).perform()];
-                }
-            });
-        });
+        return protractor_1.browser.actions().mouseMove((this.getDomElementByCss(css))).perform();
     };
     /**
      * Hover over an element
@@ -510,10 +509,7 @@ var BetterProtractorService = /** @class */ (function () {
     BetterProtractorService.prototype.getElementSize = function (selector) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getDomElementByCss(selector)];
-                    case 1: return [2 /*return*/, (_a.sent()).getSize()];
-                }
+                return [2 /*return*/, (this.getDomElementByCss(selector)).getSize()];
             });
         });
     };

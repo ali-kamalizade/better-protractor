@@ -5,7 +5,7 @@ const {SpecReporter} = require('jasmine-spec-reporter');
 // todo Chrome for CI
 process.env.CHROME_BIN = process.env.CHROME_BIN || require('puppeteer').executablePath();
 
-const baseUrl = 'https://sedeo.net/'; /* Live testing*/
+const baseUrl = 'https://github.com'; /* Live testing*/
 const timeout = baseUrl.indexOf('https://') === -1? 60000 : 25000;
 
 //const UtilityService = require('./index.ts');
@@ -22,8 +22,8 @@ exports.config = {
 		'browserName': 'chrome',
 		// disable "Chrome is being controlled by automated software"
 		chromeOptions: {
-			args: [... service.chromeDriverHideMessages],
-			binary: process.env.CHROME_BIN
+			args: [... isRunningInCi()? service.chromeDriverCiOptions : ''].concat(service.chromeDriverHideMessages),
+			binary: isRunningInCi()? process.env.CHROME_BIN : undefined
 		}
 	},
 	directConnect: true,
@@ -41,6 +41,7 @@ exports.config = {
 		});
 	},
 	onPrepare() {
+		console.log(process.argv0, isRunningInCi());
 		jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
 		// for better testing: disable Angular on non-Angular page and maximize window
 		service.disableAngular();
@@ -48,3 +49,7 @@ exports.config = {
 		service.navigateToRoute(baseUrl);
 	},
 };
+// if running in Ci, additional chrome options will be added so Protractor can run in CI
+function isRunningInCi() {
+	return process.argv0.indexOf("C:\\") === -1;
+}

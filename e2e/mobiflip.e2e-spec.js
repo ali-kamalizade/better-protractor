@@ -4,8 +4,7 @@ const e2e = require("../dist/index.js");
 const service = new e2e.BetterProtractorService();
 
 describe('Mobiflip', () => {
-	it('should navigate to Mobiflip', async() => {
-		await service.disableAngular();
+	beforeAll(async() => {
 		await service.navigateToRoute('https://mobiflip.de');
 		await service.pauseBrowserTemporarily(500);
 		expect(await service.checkIfRouteContains('mobiflip')).toBe(true);
@@ -15,7 +14,7 @@ describe('Mobiflip', () => {
 		await service.pauseBrowserTemporarily(1000);
 	});
 	it('should scroll to sharing buttons', async() => {
-		await service.scrollToElement('".sharep"', false);
+		await service.scrollToElement('".sharep"');
 		await service.pauseBrowserTemporarily(3000);
 	});
 });

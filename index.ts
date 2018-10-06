@@ -24,6 +24,15 @@ export class BetterProtractorService {
 	 * @type {string}
 	 */
 	chromeDriverDisableGpu: string = '--disable-gpu';
+	/**
+	 * Options for Chrome to be able to run in CI
+	 * @type {string []}
+	 */
+	chromeDriverCiOptions: string [] = [
+		'--headless',
+		'--disable-gpu',
+		'--no-sandbox'
+	];
 
 	/**
 	 * @param {boolean} isDisabled if Angular change detection should be disabled
@@ -171,8 +180,8 @@ export class BetterProtractorService {
 	 * @param css {string}
 	 * @return Promise
 	 */
-	async hoverElementByCss(css: string) {
-		return browser.actions().mouseMove((await this.getDomElementByCss(css))).perform();
+	hoverElementByCss(css: string) {
+		return browser.actions().mouseMove((this.getDomElementByCss(css))).perform();
 	}
 	/**
 	 * Hover over an element
@@ -422,7 +431,7 @@ export class BetterProtractorService {
 	 * @returns {Promise<promise.Promise<ISize>>}
 	 */
 	async getElementSize(selector: string) {
-		return (await this.getDomElementByCss(selector)).getSize();
+		return (this.getDomElementByCss(selector)).getSize();
 	}
 	/**
 	 * Represents a library of canned expected conditions that are useful for protractor, especially when dealing with non-angular apps.

@@ -15,4 +15,4 @@ script:
   # launch Selenium standalone in the background
   - npm run webdriver-start
   # run Protractor E2E tests
-  - npm run ci-e2e
+  - npm run protractor
