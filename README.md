@@ -23,6 +23,7 @@ However, Protractor (and therefore *better-protractor*) can be used on any kind 
 - Take screenshots of web pages
 - Get the number of elements on a web page by CSS query
 - Get the size of any element
+- Display mouse pointer
 - Access the underlying Protractor API
 - And many more useful methods at your disposal
 

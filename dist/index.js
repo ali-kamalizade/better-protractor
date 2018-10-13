@@ -170,7 +170,7 @@ var BetterProtractorService = /** @class */ (function () {
      * @param css {string}
      */
     BetterProtractorService.prototype.clickElementByCss = function (css) {
-        return this.clickElement(protractor_1.element(protractor_1.by.css(css)));
+        return this.clickElement(this.getDomElementByCss(css));
     };
     /**
      * Click a element by ID
@@ -178,7 +178,7 @@ var BetterProtractorService = /** @class */ (function () {
      * @param elementId {string}
      */
     BetterProtractorService.prototype.clickElementById = function (elementId) {
-        return this.clickElement(protractor_1.element(protractor_1.by.id(elementId)));
+        return this.clickElement(this.getDomElementById(elementId));
     };
     /**
      * Click a element with an tag
@@ -186,7 +186,7 @@ var BetterProtractorService = /** @class */ (function () {
      * @param elementTag {string}
      */
     BetterProtractorService.prototype.clickElementByTag = function (elementTag) {
-        return this.clickElement(protractor_1.element(protractor_1.by.tagName(elementTag)));
+        return this.clickElement(this.getDomElementByTag(elementTag));
     };
     /**
      * Click a element by XPath
@@ -194,7 +194,7 @@ var BetterProtractorService = /** @class */ (function () {
      * @param xpath {string}
      */
     BetterProtractorService.prototype.clickElementByXPath = function (xpath) {
-        return this.clickElement(protractor_1.element(protractor_1.by.xpath(xpath)));
+        return this.clickElement(this.getDomElementByXPath(xpath));
     };
     /**
      * Click element by link text
@@ -217,7 +217,9 @@ var BetterProtractorService = /** @class */ (function () {
      * @return Promise
      */
     BetterProtractorService.prototype.hoverElementByCss = function (css) {
-        return protractor_1.browser.actions().mouseMove((this.getDomElementByCss(css))).perform();
+        return protractor_1.browser.actions()
+            .mouseMove((this.getDomElementByCss(css)))
+            .perform();
     };
     /**
      * Hover over an element
@@ -409,7 +411,7 @@ var BetterProtractorService = /** @class */ (function () {
         return this.executeScript('return sessionStorage.getItem("' + item + '");');
     };
     /**
-     * Scroll to a DOM element
+     * Smooth scroll to a DOM element
      * @param selector {string} CSS query
      * @returns {promise.Promise<void>}
      */
@@ -509,7 +511,7 @@ var BetterProtractorService = /** @class */ (function () {
     BetterProtractorService.prototype.getElementSize = function (selector) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, (this.getDomElementByCss(selector)).getSize()];
+                return [2 /*return*/, this.getDomElementByCss(selector).getSize()];
             });
         });
     };
@@ -625,6 +627,136 @@ var BetterProtractorService = /** @class */ (function () {
      */
     BetterProtractorService.prototype.disableAngular = function () {
         return protractor_1.browser.waitForAngularEnabled(false);
+    };
+    /**
+     * Display a mouse pointer
+     * @param options
+     */
+    BetterProtractorService.prototype.showMousePointer = function (options) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.executeScript(function () {
+                            var EventSniffer = function () {
+                                this.history = [];
+                                this.callbacks = {};
+                                this.minCacheSize = 100;
+                                this.maxCacheSize = 500;
+                            };
+                            EventSniffer.prototype.handle = function (name, e) {
+                                if (this.history.indexOf(e) > -1) {
+                                    return;
+                                }
+                                this.addToHistory(e);
+                                this.trigger(name, e);
+                            };
+                            EventSniffer.prototype.trigger = function (name, e) {
+                                if (!this.callbacks[name]) {
+                                    return;
+                                }
+                                this.callbacks[name].forEach(function (cb) {
+                                    cb(e);
+                                });
+                            };
+                            EventSniffer.prototype.addToHistory = function (e) {
+                                if (this.history.length >= this.maxCacheSize) {
+                                    this.history = this.history
+                                        .slice(this.history.length - this.minCacheSize);
+                                }
+                                this.history.push(e);
+                            };
+                            EventSniffer.prototype.on = function (name, cb) {
+                                if (!this.callbacks[name]) {
+                                    this.callbacks[name] = [];
+                                    // Add a dummy event listener incase the page hasn't
+                                    document.addEventListener(name, function () {
+                                    });
+                                }
+                                this.callbacks[name].push(cb);
+                            };
+                            EventSniffer.prototype.install = function () {
+                                var proto = EventTarget.prototype;
+                                var oldAEL = proto.addEventListener;
+                                var self = this;
+                                proto.addEventListener = function (name) {
+                                    // Add our own event listener first
+                                    oldAEL.call(this, name, function (e) {
+                                        self.handle(name, e);
+                                    });
+                                    // The add the users listener as normal
+                                    return oldAEL.apply(this, arguments);
+                                };
+                            };
+                            var MouseTracker = function () {
+                                var MOUSE_ID = 'protractor-mouse-tracker';
+                                this.indicator = document.createElement('div');
+                                this.indicator.setAttribute('id', MOUSE_ID);
+                                this.style = document.createElement('style');
+                                this.style.innerHTML =
+                                    "#" + MOUSE_ID + " {\n\t\t\t\t\t\twidth: 0.5em;\n\t\t\t\t\t\theight: 0.5em;\n\t\t\t\t\t\tbackground: orange;\n\t\t\t\t\t\tbox-shadow: 0 0 0 1px white;\n\t\t\t\t\t\tborder-radius: 50%;\n\t\t\t\t\t\tposition: absolute;\n\t\t\t\t\t\ttop: 0;\n\t\t\t\t\t\tleft: 0;\n\t\t\t\t\t\tz-index: 100000;\n\t\t\t\t\t\tpointer-events: none;\n\t\t\t\t\t\ttransform: translate(-50%, -50%);\n\t\t\t\t\t\ttransition: background-color 0.2s linear;\n\t\t\t\t\t}\n\t\t\t\t\t#" + MOUSE_ID + ".mousedown {\n\t\t\t\t\t\tbackground: rgba(0, 128, 0, 0.5);\n\t\t\t\t\t}\n\t\t\t\t\t@keyframes mouse-tracker-click {\n\t\t\t\t\t\tto {\n\t\t\t\t\t\t\twidth: 5em;\n\t\t\t\t\t\t\theight: 5em;\n\t\t\t\t\t\t\topacity: 0;\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\t#" + MOUSE_ID + " .click {\n\t\t\t\t\t\twidth: 0.5em;\n\t\t\t\t\t\theight: 0.5em;\n\t\t\t\t\t\tborder: 1px solid rgba(128, 128, 128, 1);\n\t\t\t\t\t\tbox-shadow: 0 0 0 1px rgba(256, 256, 256, 1);\n\t\t\t\t\t\tborder-radius: 50%;\n\t\t\t\t\t\tposition: absolute;\n\t\t\t\t\t\ttop: 50%;\n\t\t\t\t\t\tleft: 50%;\n\t\t\t\t\t\tpointer-events: none;\n\t\t\t\t\t\ttransform: translate(-50%, -50%);\n\t\t\t\t\t\tanimation: 1s mouse-tracker-click;\n\t\t\t\t\t}";
+                            };
+                            MouseTracker.prototype.move = function (x, y) {
+                                this.indicator.style.left = x + 'px';
+                                this.indicator.style.top = y + 'px';
+                            };
+                            MouseTracker.prototype.click = function () {
+                                var click = document.createElement('div');
+                                click.setAttribute('class', 'click');
+                                click.addEventListener('animationend', function () {
+                                    click.remove();
+                                }, false);
+                                this.indicator.appendChild(click);
+                            };
+                            MouseTracker.prototype.mousedown = function () {
+                                this.indicator.classList.add('mousedown');
+                            };
+                            MouseTracker.prototype.mouseup = function () {
+                                this.indicator.classList.remove('mousedown');
+                            };
+                            MouseTracker.prototype.install = function () {
+                                document.body.appendChild(this.indicator);
+                                document.head.appendChild(this.style);
+                            };
+                            var tracker = new MouseTracker();
+                            var sniffer = new EventSniffer();
+                            sniffer.install();
+                            tracker.install();
+                            sniffer.on('click', function () {
+                                tracker.click();
+                            });
+                            sniffer.on('mousemove', function (e) {
+                                tracker.move(e.x, e.y);
+                            });
+                            sniffer.on('mousedown', function () {
+                                tracker.mousedown();
+                            });
+                            sniffer.on('mouseup', function () {
+                                tracker.mouseup();
+                            });
+                        })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /**
+     * Hide mouse pointer displayed with @link {showMouse()}
+     */
+    BetterProtractorService.prototype.hideMouse = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.executeScript(function () {
+                            document.getElementById('protractor-mouse-tracker').remove();
+                        })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     /**
      * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
