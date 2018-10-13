@@ -32,7 +32,9 @@ describe('Google', () => {
 		await service.pressKey(Key.ESCAPE);
 		await service.pauseBrowserTemporarily(1500);
 	});
-	it('should take a screenshot of the result page', async () => {
+	it('should take a screenshot of the result page with visible mouse pointer', async () => {
+		await service.showMousePointer();
 		service.screenshot();
+		await service.hideMouse();
 	});
 });

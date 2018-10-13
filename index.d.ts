@@ -288,6 +288,15 @@ export interface BetterProtractorService {
 	 */
 	getElementSize(selector: string);
 	/**
+	 * Display a mouse pointer
+	 * @param options
+	 */
+	showMousePointer(options?);
+	/**
+	 * Hide mouse pointer displayed with @link {showMouse()}
+	 */
+	hideMouse();
+	/**
 	 * Represents a library of canned expected conditions that are useful for protractor, especially when dealing with non-angular apps.
 	 * @returns {Promise<ProtractorExpectedConditions>}
 	 */

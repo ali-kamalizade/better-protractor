@@ -87,7 +87,7 @@ export class BetterProtractorService {
 	 * @returns {WebElementPromise}
 	 * @param element
 	 */
-	getElementAsWebElement(element) {
+	getElementAsWebElement(element: ElementFinder) {
 		return element.getWebElement();
 	}
 	/**
@@ -134,7 +134,7 @@ export class BetterProtractorService {
 	 * @param css {string}
 	 */
 	clickElementByCss(css: string) {
-		return this.clickElement(element(by.css(css)));
+		return this.clickElement(this.getDomElementByCss(css));
 	}
 	/**
 	 * Click a element by ID
@@ -142,7 +142,7 @@ export class BetterProtractorService {
 	 * @param elementId {string}
 	 */
 	clickElementById(elementId: string) {
-		return this.clickElement(element(by.id(elementId)));
+		return this.clickElement(this.getDomElementById(elementId));
 	}
 	/**
 	 * Click a element with an tag
@@ -150,7 +150,7 @@ export class BetterProtractorService {
 	 * @param elementTag {string}
 	 */
 	clickElementByTag(elementTag: string) {
-		return this.clickElement(element(by.tagName(elementTag)));
+		return this.clickElement(this.getDomElementByTag(elementTag));
 	}
 	/**
 	 * Click a element by XPath
@@ -158,7 +158,7 @@ export class BetterProtractorService {
 	 * @param xpath {string}
 	 */
 	clickElementByXPath(xpath: string) {
-		return this.clickElement(element(by.xpath(xpath)));
+		return this.clickElement(this.getDomElementByXPath(xpath));
 	}
 	/**
 	 * Click element by link text
@@ -181,7 +181,9 @@ export class BetterProtractorService {
 	 * @return Promise
 	 */
 	hoverElementByCss(css: string) {
-		return browser.actions().mouseMove((this.getDomElementByCss(css))).perform();
+		return browser.actions()
+			.mouseMove((this.getDomElementByCss(css)))
+			.perform();
 	}
 	/**
 	 * Hover over an element
@@ -356,7 +358,7 @@ export class BetterProtractorService {
 		return this.executeScript('return sessionStorage.getItem("' + item  + '");');
 	}
 	/**
-	 * Scroll to a DOM element
+	 * Smooth scroll to a DOM element
 	 * @param selector {string} CSS query
 	 * @returns {promise.Promise<void>}
 	 */
@@ -431,7 +433,7 @@ export class BetterProtractorService {
 	 * @returns {Promise<promise.Promise<ISize>>}
 	 */
 	async getElementSize(selector: string) {
-		return (this.getDomElementByCss(selector)).getSize();
+		return this.getDomElementByCss(selector).getSize();
 	}
 	/**
 	 * Represents a library of canned expected conditions that are useful for protractor, especially when dealing with non-angular apps.
@@ -513,6 +515,154 @@ export class BetterProtractorService {
 	 */
 	disableAngular() {
 		return browser.waitForAngularEnabled(false);
+	}
+	/**
+	 * Display a mouse pointer
+	 * @param options
+	 */
+	async showMousePointer(options?) {
+		await this.executeScript(() => {
+			const EventSniffer = function () {
+				this.history = [];
+				this.callbacks = {};
+				this.minCacheSize = 100;
+				this.maxCacheSize = 500;
+			};
+			EventSniffer.prototype.handle = function (name, e) {
+				if (this.history.indexOf(e) > -1) {
+					return;
+				}
+				this.addToHistory(e);
+				this.trigger(name, e);
+			};
+			EventSniffer.prototype.trigger = function (name, e) {
+				if (!this.callbacks[name]) {
+					return;
+				}
+				this.callbacks[name].forEach(function (cb) {
+					cb(e);
+				});
+			};
+			EventSniffer.prototype.addToHistory = function (e) {
+				if (this.history.length >= this.maxCacheSize) {
+					this.history = this.history
+						.slice(this.history.length - this.minCacheSize);
+				}
+				this.history.push(e);
+			};
+			EventSniffer.prototype.on = function (name, cb) {
+				if (!this.callbacks[name]) {
+					this.callbacks[name] = [];
+					// Add a dummy event listener incase the page hasn't
+					document.addEventListener(name, function () {
+					});
+				}
+				this.callbacks[name].push(cb);
+			};
+			EventSniffer.prototype.install = function () {
+				const proto = EventTarget.prototype;
+				const oldAEL = proto.addEventListener;
+				const self = this;
+				proto.addEventListener = function (name) {
+					// Add our own event listener first
+					oldAEL.call(this, name, function (e) {
+						self.handle(name, e);
+					});
+					// The add the users listener as normal
+					return oldAEL.apply(this, arguments);
+				};
+			};
+			const MouseTracker = function () {
+				const MOUSE_ID = 'protractor-mouse-tracker';
+				this.indicator = document.createElement('div');
+				this.indicator.setAttribute('id', MOUSE_ID);
+				this.style = document.createElement('style');
+				this.style.innerHTML =
+					`#${MOUSE_ID} {
+						width: 0.5em;
+						height: 0.5em;
+						background: orange;
+						box-shadow: 0 0 0 1px white;
+						border-radius: 50%;
+						position: absolute;
+						top: 0;
+						left: 0;
+						z-index: 100000;
+						pointer-events: none;
+						transform: translate(-50%, -50%);
+						transition: background-color 0.2s linear;
+					}
+					#${MOUSE_ID}.mousedown {
+						background: rgba(0, 128, 0, 0.5);
+					}
+					@keyframes mouse-tracker-click {
+						to {
+							width: 5em;
+							height: 5em;
+							opacity: 0;
+						}
+					}
+					#${MOUSE_ID} .click {
+						width: 0.5em;
+						height: 0.5em;
+						border: 1px solid rgba(128, 128, 128, 1);
+						box-shadow: 0 0 0 1px rgba(256, 256, 256, 1);
+						border-radius: 50%;
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						pointer-events: none;
+						transform: translate(-50%, -50%);
+						animation: 1s mouse-tracker-click;
+					}`;
+			};
+			MouseTracker.prototype.move = function (x, y) {
+				this.indicator.style.left = x + 'px';
+				this.indicator.style.top = y + 'px';
+			};
+			MouseTracker.prototype.click = function () {
+				const click = document.createElement('div');
+				click.setAttribute('class', 'click');
+				click.addEventListener('animationend', function () {
+					click.remove();
+				}, false);
+				this.indicator.appendChild(click);
+			};
+			MouseTracker.prototype.mousedown = function () {
+				this.indicator.classList.add('mousedown');
+			};
+			MouseTracker.prototype.mouseup = function () {
+				this.indicator.classList.remove('mousedown');
+			};
+			MouseTracker.prototype.install = function () {
+				document.body.appendChild(this.indicator);
+				document.head.appendChild(this.style);
+			};
+			const tracker = new MouseTracker();
+			const sniffer = new EventSniffer();
+			sniffer.install();
+			tracker.install();
+			sniffer.on('click', function () {
+				tracker.click();
+			});
+			sniffer.on('mousemove', function (e) {
+				tracker.move(e.x, e.y);
+			});
+			sniffer.on('mousedown', function () {
+				tracker.mousedown();
+			});
+			sniffer.on('mouseup', function () {
+				tracker.mouseup();
+			});
+		});
+	}
+	/**
+	 * Hide mouse pointer displayed with @link {showMouse()}
+	 */
+	public async hideMouse() {
+		await this.executeScript(() => {
+			document.getElementById('protractor-mouse-tracker').remove();
+		});
 	}
 	/**
 	 * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
