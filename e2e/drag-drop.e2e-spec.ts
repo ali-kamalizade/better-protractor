@@ -15,7 +15,7 @@ describe('Drag & Drop', () => {
 			service.getDomElementByCss(`.${listClass}${targetIndex}`),
 			100
 		);
-		const newItem = service.getDomElementByCss(`.StackedList > li:nth-child(${targetIndex})`);
-		expect(await service.getAttributeFromDomElement(newItem, 'class')).toContain(`${listClass}${sourceIndex}`);
+		const movedItem = service.getDomElementByCss(`.StackedList > li:nth-child(${targetIndex})`);
+		expect(await service.getAttributeFromDomElement(movedItem, 'class')).toContain(`${listClass}${sourceIndex}`);
 	});
 });

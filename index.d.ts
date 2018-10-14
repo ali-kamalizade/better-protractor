@@ -297,6 +297,11 @@ export interface BetterProtractorService {
 	 */
 	hideMouse();
 	/**
+	 * Drag an element to a specified location or element.
+	 * If you provide a WebElement, then the location will be used to calculate the offset.
+	 */
+	dragElement(element: ElementFinder, target: WebElement | ILocation, waitTime: number = 0);
+	/**
 	 * Represents a library of canned expected conditions that are useful for protractor, especially when dealing with non-angular apps.
 	 * @returns {Promise<ProtractorExpectedConditions>}
 	 */
