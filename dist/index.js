@@ -759,6 +759,58 @@ var BetterProtractorService = /** @class */ (function () {
         });
     };
     /**
+     * Drag an element to a specified location or element.
+     * If you provide a WebElement, then the location will be used to calculate the offset.
+     */
+    BetterProtractorService.prototype.dragElement = function (element, target, waitTime) {
+        if (waitTime === void 0) { waitTime = 0; }
+        return __awaiter(this, void 0, void 0, function () {
+            var targetCoordinates, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (!this.isILocation(target)) return [3 /*break*/, 1];
+                        _a = target;
+                        return [3 /*break*/, 3];
+                    case 1: return [4 /*yield*/, this.getOffset(element, target)];
+                    case 2:
+                        _a = _b.sent();
+                        _b.label = 3;
+                    case 3:
+                        targetCoordinates = _a;
+                        return [4 /*yield*/, this.hoverElement(element)];
+                    case 4:
+                        _b.sent();
+                        // focus element
+                        return [4 /*yield*/, protractor_1.browser.driver.actions()
+                                .mouseDown()
+                                .perform()];
+                    case 5:
+                        // focus element
+                        _b.sent();
+                        return [4 /*yield*/, this.pauseBrowserTemporarily(waitTime)];
+                    case 6:
+                        _b.sent();
+                        // drag element
+                        return [4 /*yield*/, protractor_1.browser.driver.actions()
+                                .mouseMove(targetCoordinates)
+                                .perform()];
+                    case 7:
+                        // drag element
+                        _b.sent();
+                        // let go of mouse
+                        return [4 /*yield*/, protractor_1.browser.driver.actions()
+                                .mouseUp()
+                                .perform()];
+                    case 8:
+                        // let go of mouse
+                        _b.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /**
      * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
      * @return {ProtractorBrowser}
      */
@@ -785,6 +837,34 @@ var BetterProtractorService = /** @class */ (function () {
      */
     BetterProtractorService.prototype.getProtractorElementArrayFinder = function (by) {
         return protractor_1.element.all(by);
+    };
+    BetterProtractorService.prototype.isILocation = function (element) {
+        return element.x !== undefined && element.y !== undefined;
+    };
+    BetterProtractorService.prototype.getOffset = function (source, target) {
+        return __awaiter(this, void 0, void 0, function () {
+            var sourceCoordinates, targetCoordinates, sourceDimensions, targetDimensions;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, source.getLocation()];
+                    case 1:
+                        sourceCoordinates = _a.sent();
+                        return [4 /*yield*/, target.getLocation()];
+                    case 2:
+                        targetCoordinates = _a.sent();
+                        return [4 /*yield*/, source.getSize()];
+                    case 3:
+                        sourceDimensions = _a.sent();
+                        return [4 /*yield*/, target.getSize()];
+                    case 4:
+                        targetDimensions = _a.sent();
+                        return [2 /*return*/, {
+                                x: Math.round(targetCoordinates.x - sourceCoordinates.x + 0.5 * (targetDimensions.width - sourceDimensions.width)),
+                                y: Math.round(targetCoordinates.y - sourceCoordinates.y + 0.5 * (targetDimensions.height - sourceDimensions.height))
+                            }];
+                }
+            });
+        });
     };
     return BetterProtractorService;
 }());

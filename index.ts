@@ -1,5 +1,5 @@
 import {browser, by, element, ElementFinder, protractor, ProtractorBy} from 'protractor'; // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
-import {Key} from 'selenium-webdriver';
+import {Key, WebElement, ILocation} from 'selenium-webdriver';
 import * as fs from 'fs';
 
 /**
@@ -665,6 +665,27 @@ export class BetterProtractorService {
 		});
 	}
 	/**
+	 * Drag an element to a specified location or element.
+	 * If you provide a WebElement, then the location will be used to calculate the offset.
+	 */
+	public async dragElement(element: ElementFinder, target: WebElement | ILocation, waitTime: number = 0) {
+		const targetCoordinates = this.isILocation(target) ? target : await this.getOffset(element, target);
+		await this.hoverElement(element);
+		// focus element
+		await browser.driver.actions()
+			.mouseDown()
+			.perform();
+		await this.pauseBrowserTemporarily(waitTime);
+		// drag element
+		await browser.driver.actions()
+			.mouseMove(targetCoordinates)
+			.perform();
+		// let go of mouse
+		await browser.driver.actions()
+			.mouseUp()
+			.perform();
+	}
+	/**
 	 * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
 	 * @return {ProtractorBrowser}
 	 */
@@ -692,4 +713,20 @@ export class BetterProtractorService {
 	getProtractorElementArrayFinder(by: any) {
 		return element.all(by);
 	}
+
+	private isILocation(element: ILocation | WebElement): element is ILocation {
+		return (element as ILocation).x !== undefined && (element as ILocation).y !== undefined;
+	}
+
+	private async getOffset(source: WebElement, target: WebElement): Promise<ILocation> {
+		const sourceCoordinates = await source.getLocation();
+		const targetCoordinates = await target.getLocation();
+		const sourceDimensions = await source.getSize();
+		const targetDimensions = await target.getSize();
+		return {
+			x: Math.round(targetCoordinates.x - sourceCoordinates.x + 0.5 * (targetDimensions.width - sourceDimensions.width)),
+			y: Math.round(targetCoordinates.y - sourceCoordinates.y + 0.5 * (targetDimensions.height - sourceDimensions.height))
+		};
+	}
+
 }
