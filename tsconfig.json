@@ -3,7 +3,7 @@
 		"outDir": "./dist/",
 		"baseUrl": "",
 		"sourceMap": true,
-		"declaration": false,
+		"declaration": true,
 		"moduleResolution": "node",
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
@@ -20,6 +20,8 @@
 		"removeComments": false
 	},
 	"exclude": [
-		"node_modules"
+		"node_modules",
+		"e2e",
+		"spec"
 	]
 }

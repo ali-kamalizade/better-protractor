@@ -14,8 +14,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
         while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
                 case 0: case 1: t = op; break;
                 case 4: _.label++; return { value: op[1], done: false };
@@ -35,13 +35,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// noinspection ES6UnusedImports
 var protractor_1 = require("protractor"); // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
+// noinspection ES6UnusedImports
 var selenium_webdriver_1 = require("selenium-webdriver");
 var fs = require("fs");
 /**
  * Provides helper methods which allow for testing common test cases.
  * @see Page Object in Selenium
- * @type BetterProtractorService - If you add a new method here, please add the method signature in index.d.ts!
+ * @type BetterProtractorService
  */
 var BetterProtractorService = /** @class */ (function () {
     /**
@@ -52,7 +54,6 @@ var BetterProtractorService = /** @class */ (function () {
         /**
          * You need to set this in capabilities.chromeOptions.args.
          * Hides Google Cloud printer notificationa and "Chrome is being controlled by automated software" alert
-         * @type {string[]}
          */
         this.chromeDriverHideMessages = [
             '--disable-infobars',
@@ -61,12 +62,10 @@ var BetterProtractorService = /** @class */ (function () {
         /**
          * You need to set this in capabilities.chromeOptions.args.
          * Disable GPU as it sometimes can lead to unexpected behavior
-         * @type {string}
          */
         this.chromeDriverDisableGpu = '--disable-gpu';
         /**
          * Options for Chrome to be able to run in CI
-         * @type {string []}
          */
         this.chromeDriverCiOptions = [
             '--headless',
@@ -79,7 +78,6 @@ var BetterProtractorService = /** @class */ (function () {
     }
     /**
      * Navigate to a route or a URL.
-     * @returns {wdpromise.Promise<any>}
      * @param path {string}
      */
     BetterProtractorService.prototype.navigateToRoute = function (path) {
@@ -88,7 +86,6 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Get an element by its DOM id
-     * @returns {ElementFinder}
      * @param elementId {string}
      */
     BetterProtractorService.prototype.getDomElementById = function (elementId) {
@@ -96,7 +93,6 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Get an element by its DOM tag
-     * @returns {ElementFinder}
      * @param elementTag {string}
      */
     BetterProtractorService.prototype.getDomElementByTag = function (elementTag) {
@@ -104,7 +100,6 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Get an element by its XPath
-     * @returns {ElementFinder}
      * @param xpath {string}
      */
     BetterProtractorService.prototype.getDomElementByXPath = function (xpath) {
@@ -112,7 +107,6 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Get an element by CSS query
-     * @returns {ElementFinder}
      * @param selector {string}
      */
     BetterProtractorService.prototype.getDomElementByCss = function (selector) {
@@ -120,7 +114,6 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Get an element
-     * @returns {WebElementPromise}
      * @param element
      */
     BetterProtractorService.prototype.getElementAsWebElement = function (element) {
@@ -129,7 +122,6 @@ var BetterProtractorService = /** @class */ (function () {
     /**
      * @param selector {string}
      * @param index {number}
-     * @return {ElementFinder}
      */
     BetterProtractorService.prototype.getDomElementByIndex = function (selector, index) {
         return protractor_1.protractor.element.all(protractor_1.by.css(selector)).get(index);
@@ -158,15 +150,13 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Click a element
-     * @returns {Promise}
-     * @param element
+     * @param element {WebElement}
      */
     BetterProtractorService.prototype.clickElement = function (element) {
         return element.click();
     };
     /**
      * Click a element by CSS
-     * @returns {Promise}
      * @param css {string}
      */
     BetterProtractorService.prototype.clickElementByCss = function (css) {
@@ -174,7 +164,6 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Click a element by ID
-     * @returns {Promise}
      * @param elementId {string}
      */
     BetterProtractorService.prototype.clickElementById = function (elementId) {
@@ -182,7 +171,6 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Click a element with an tag
-     * @returns {Promise}
      * @param elementTag {string}
      */
     BetterProtractorService.prototype.clickElementByTag = function (elementTag) {
@@ -190,7 +178,6 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Click a element by XPath
-     * @returns {Promise}
      * @param xpath {string}
      */
     BetterProtractorService.prototype.clickElementByXPath = function (xpath) {
@@ -199,7 +186,6 @@ var BetterProtractorService = /** @class */ (function () {
     /**
      * Click element by link text
      * @param text {string}
-     * @returns {Promise}
      */
     BetterProtractorService.prototype.clickElementByLinkText = function (text) {
         return this.clickElement(protractor_1.element(protractor_1.by.linkText(text)));
@@ -214,7 +200,6 @@ var BetterProtractorService = /** @class */ (function () {
     /**
      * Hover over an element by CSS
      * @param css {string}
-     * @return Promise
      */
     BetterProtractorService.prototype.hoverElementByCss = function (css) {
         return protractor_1.browser.actions()
@@ -223,8 +208,7 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Hover over an element
-     * @param element
-     * @return Promise
+     * @param element {WebElement}
      */
     BetterProtractorService.prototype.hoverElement = function (element) {
         return __awaiter(this, void 0, void 0, function () {
@@ -249,7 +233,7 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Don't let Protractor close the browser after execution
-     * @return {*}
+     * @return {Promise<*>}
      */
     BetterProtractorService.prototype.pauseBrowser = function () {
         return protractor_1.browser.pause();
@@ -265,14 +249,13 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Wait for Angular to be initialized
-     * @return {void|promise.Promise<any>}
+     * @return {promise.Promise<*>}
      */
     BetterProtractorService.prototype.waitForBrowser = function () {
         return protractor_1.browser.waitForAngular();
     };
     /**
      * Get the current browser URL
-     * @returns {promise.Promise<string>}
      * @param useDriver {boolean}
      */
     BetterProtractorService.prototype.getUrl = function (useDriver) {
@@ -285,23 +268,21 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Check if a element is visible and if it can be selected
-     * @param element
-     * @return {wdpromise.Promise<boolean> | webdriver.promise.Promise.<boolean>}
+     * @param element {ElementFinder}
      */
     BetterProtractorService.prototype.checkIfExists = function (element) {
         return element.isPresent();
     };
     /**
      * Check if a element is visible
-     * @param element
-     * @return {wdpromise.Promise<boolean> | webdriver.promise.Promise.<boolean>}
+     * @param element {WebElement}
      */
     BetterProtractorService.prototype.checkIfVisible = function (element) {
         return element.isDisplayed();
     };
     /**
      * Get an attribute from a DOM element (e.g. class)
-     * @param element
+     * @param element {WebElement}
      * @param attribute {string} e.g. 'value' (to get input value) or 'class'
      */
     BetterProtractorService.prototype.getAttributeFromDomElement = function (element, attribute) {
@@ -310,7 +291,6 @@ var BetterProtractorService = /** @class */ (function () {
     /**
      * @param contains {string | Array}
      * @param url {string} if not passed, then current url will be used
-     * @return {boolean}
      */
     BetterProtractorService.prototype.checkIfRouteContains = function (contains, url) {
         if (url === void 0) { url = undefined; }
@@ -355,7 +335,6 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Get height and width of browser window
-     * @return {promise.Promise<ISize>}
      */
     BetterProtractorService.prototype.getWindowSize = function () {
         return protractor_1.browser.driver.manage().window().getSize().then(function (size) {
@@ -365,14 +344,12 @@ var BetterProtractorService = /** @class */ (function () {
     /**
      * Use this method to maximize the browser window.
      * If this method crashes the browser, then you need to update with "webdriver-manager update".
-     * @return {promise.Promise<void>}
      */
     BetterProtractorService.prototype.maximizeWindow = function () {
         return protractor_1.browser.driver.manage().window().maximize();
     };
     /**
      * Get browser cookies
-     * @returns {promise.Promise<IWebDriverOptionsCookie>}
      */
     BetterProtractorService.prototype.getCookies = function () {
         return protractor_1.browser.manage().getCookies().then(function (cookies) {
@@ -421,7 +398,6 @@ var BetterProtractorService = /** @class */ (function () {
     /**
      * Get the number of DOM elements by CSS query
      * @param {string} selector CSS query
-     * @return {promise.Promise<number>} how many elements were found
      */
     BetterProtractorService.prototype.getDomElementsCount = function (selector) {
         return protractor_1.element.all(protractor_1.by.css(selector)).count();
@@ -430,7 +406,6 @@ var BetterProtractorService = /** @class */ (function () {
      * Delete characters of an <input> or <textarea> element
      * @param {string} selector CSS query
      * @param {number} count how many times to do this. Otherwise, it will be done once.
-     * @returns {Promise<promise.Promise<void>>}
      */
     BetterProtractorService.prototype.deleteCharsFromInput = function (selector, count) {
         return __awaiter(this, void 0, void 0, function () {
@@ -462,7 +437,6 @@ var BetterProtractorService = /** @class */ (function () {
     /**
      * Press the TAB key
      * @param {number} count how many times TAB key should be pressed. Otherwise, it will be pressed once.
-     * @returns {promise.Promise<void>}
      */
     BetterProtractorService.prototype.pressTab = function (count) {
         return __awaiter(this, void 0, void 0, function () {
@@ -491,14 +465,14 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Get the current web page title.
-     * @returns {any}
+     * @returns {Promise<string>}
      */
     BetterProtractorService.prototype.getBrowserTitle = function () {
         return protractor_1.browser.getTitle();
     };
     /**
      * Close the current window.
-     * @returns {any}
+     * @returns {Promise<void>}
      */
     BetterProtractorService.prototype.closeWindow = function () {
         return protractor_1.browser.close();
@@ -506,7 +480,6 @@ var BetterProtractorService = /** @class */ (function () {
     /**
      * Get the size of an element in px.
      * @param selector {string} CSS query
-     * @returns {Promise<promise.Promise<ISize>>}
      */
     BetterProtractorService.prototype.getElementSize = function (selector) {
         return __awaiter(this, void 0, void 0, function () {
@@ -530,7 +503,6 @@ var BetterProtractorService = /** @class */ (function () {
      * Take a screenshot and save it in the specified directory.
      * @param {string} filename if not provided, then the browser title + current date will be used
      * @param {string} directory if not provided, then a directory called better-protractor-screenshots will be created and used for all screenshots
-     * @return {Promise<any>}
      */
     BetterProtractorService.prototype.screenshot = function (filename, directory) {
         if (directory === void 0) { directory = './better-protractor-screenshots'; }
@@ -578,7 +550,6 @@ var BetterProtractorService = /** @class */ (function () {
     /**
      * Check if a page is served using the secure HTTPS
      * @param {string} url if no URL is provided, then the current URL will be used
-     * @returns {Promise<boolean>}
      */
     BetterProtractorService.prototype.isHttps = function (url) {
         return __awaiter(this, void 0, void 0, function () {
@@ -601,14 +572,13 @@ var BetterProtractorService = /** @class */ (function () {
     /**
      * Execute a script in the browser
      * @param {string | Function} script
-     * @return {Promise<any>}
+     * @return {Promise<*>}
      */
     BetterProtractorService.prototype.executeScript = function (script) {
         return protractor_1.browser.executeScript(script);
     };
     /**
      * Restart the browser. Beware that you need to call disableAngular() again if your web page is running not Angular.
-     * @returns {promise.Promise<ProtractorBrowser>}
      */
     BetterProtractorService.prototype.restartBrowser = function () {
         return protractor_1.browser.restart();
@@ -616,14 +586,12 @@ var BetterProtractorService = /** @class */ (function () {
     /**
      * Refresh current tab
      * @param {number} timeout
-     * @returns {promise.Promise<any>}
      */
     BetterProtractorService.prototype.refresh = function (timeout) {
         return protractor_1.browser.refresh(timeout);
     };
     /**
      * Disable Angular (for non-Angular pages or if you encounter problems with Angular lifecycle)
-     * @return {promise.Promise<boolean>}
      */
     BetterProtractorService.prototype.disableAngular = function () {
         return protractor_1.browser.waitForAngularEnabled(false);
@@ -818,22 +786,7 @@ var BetterProtractorService = /** @class */ (function () {
         return protractor_1.browser;
     };
     /**
-     * Get the underlying ProtractorBy if you need to access the Protractor API directly.
-     * @return {ProtractorBy}
-     */
-    BetterProtractorService.prototype.getProtractorBy = function () {
-        return protractor_1.by;
-    };
-    /**
-     * Get the underlying ElementFinder if you need to access the Protractor API directly.
-     * @return {ElementFinder}
-     */
-    BetterProtractorService.prototype.getProtractorElementFinder = function (by) {
-        return protractor_1.element(by);
-    };
-    /**
      * Get the underlying ElementArrayFinder if you need to access the Protractor API directly.
-     * @return {ElementArrayFinder}
      */
     BetterProtractorService.prototype.getProtractorElementArrayFinder = function (by) {
         return protractor_1.element.all(by);

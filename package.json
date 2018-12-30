@@ -1,6 +1,6 @@
 {
 	"name": "better-protractor",
-	"version": "1.2.9",
+	"version": "2.0.0",
 	"description": "Make end-to-end testing with Protractor great (again) - with better-protractor",
 	"scripts": {
 		"init-jasmine": "jasmine init",
@@ -12,6 +12,7 @@
 		"protractor": "protractor-flake --parser standard --max-attempts=2"
 	},
 	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
 	"author": "Ali Kamalizade",
 	"dependencies": {},
 	"devDependencies": {

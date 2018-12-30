@@ -1,6 +1,9 @@
 require("protractor"); // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
 
 const e2e = require("../dist/index.js");
+/**
+ * @type {BetterProtractorService}
+ */
 const service = new e2e.BetterProtractorService();
 
 describe('Mobiflip', () => {
@@ -16,5 +19,6 @@ describe('Mobiflip', () => {
 	it('should scroll to sharing buttons', async() => {
 		await service.scrollToElement('".sharep"');
 		await service.pauseBrowserTemporarily(3000);
+		expect(await service.getDomElementsCount('.sharep a')).toBe(4);
 	});
 });

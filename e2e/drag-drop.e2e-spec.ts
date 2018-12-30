@@ -1,5 +1,5 @@
 import {} from 'protractor'; // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
-import {BetterProtractorService} from "../index";
+import {BetterProtractorService} from '../dist';
 
 const UtilityService = require("../index.ts");
 const service: BetterProtractorService = new UtilityService.BetterProtractorService(false);

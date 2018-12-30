@@ -1,4 +1,6 @@
 import {BetterProtractorService} from "../index";
+// noinspection ES6UnusedImports
+import {promise} from 'selenium-webdriver';
 
 /**
  * Custom service which extends BetterProtractorService.

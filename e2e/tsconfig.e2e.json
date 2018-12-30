@@ -9,7 +9,6 @@
 		"lib": [
 			"es2016", "dom"
 		],
-		"outDir": "../dist/",
 		"module": "commonjs",
 		"target": "es5",
 		"types": [

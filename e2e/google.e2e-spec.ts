@@ -1,9 +1,10 @@
 import {Button} from 'protractor'; // TODO DO NOT REMOVE THIS, YOU NEED IN THIS IN EVERY SPEC!
-import {BetterProtractorService} from "../index";
 import {Key} from "selenium-webdriver";
+import {BetterProtractorService} from '../dist';
 
 const UtilityService = require("../index.ts");
 const service: BetterProtractorService = new UtilityService.BetterProtractorService(false);
+const googleInputFieldSelector = 'input[name="q"]';
 
 describe('Google', () => {
 	it('should navigate to Google search', async () => {
@@ -12,11 +13,10 @@ describe('Google', () => {
 		expect(await service.checkIfRouteContains('google', await service.getUrl())).toBe(true);
 	});
 	it('should look for sedeo and find results', async () => {
-		// demonstrate access of Protractor API
-		expect(await service.getAttributeFromDomElement(service.getProtractorElementFinder(service.getProtractorBy().css('#lst-ib')), 'class')).toContain('gsfi');
-		await service.hoverElement(service.getDomElementByCss('#lst-ib'));
+		expect(await service.getAttributeFromDomElement(service.getDomElementByCss(googleInputFieldSelector), 'type')).toBe('text');
+		await service.hoverElement(service.getDomElementByCss(googleInputFieldSelector));
 		await service.pauseBrowserTemporarily(1000);
-		await service.fillInput('#lst-ib', 'sedeo');
+		await service.fillInput(googleInputFieldSelector, 'sedeo');
 		await service.pauseBrowserTemporarily(1000);
 		await service.pressKey(Key.ARROW_DOWN);
 		await service.pauseBrowserTemporarily(500);

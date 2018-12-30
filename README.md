@@ -65,7 +65,7 @@ See the e2e folder for code examples in Javascript and TypeScript.
 4. Run ```webdriver-manager update``` (once or when you updated your browser).
 5. Run ```webdriver-manager start``` to launch Webdriver(Selenium)
 6. Run ```protractor``` or ```protractor-once``` to run the sample end-to-end tests in the e2e-folder (written in Javascript and TypeScript).
-7. Run ```npm test``` to run the unit tests.
+7. Run ```npm test``` to run the unit & e2e tests.
 
 ## Contribution
 Pull requests and feature requests are welcome!
