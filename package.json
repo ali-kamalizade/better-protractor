@@ -1,6 +1,6 @@
 {
 	"name": "better-protractor",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "Make end-to-end testing with Protractor great (again) - with better-protractor",
 	"scripts": {
 		"init-jasmine": "jasmine init",

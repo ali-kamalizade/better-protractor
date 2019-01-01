@@ -310,7 +310,7 @@ export class BetterProtractorService {
 	 * @param element
 	 * @param property {string}
 	 */
-	getStyleValue(element: WebElement, property: string): promise.Promise<string> {
+	getStyleValue(element: WebElement, property: string) {
 		return element.getCssValue(property);
 	}
 	/**
@@ -339,10 +339,9 @@ export class BetterProtractorService {
 	/**
 	 * Smooth scroll to a DOM element
 	 * @param selector {string} CSS query
-	 * @returns {promise.Promise<void>}
 	 */
-	scrollToElement(selector: string) {
-		return browser.executeScript(`document.querySelector(${selector}).scrollIntoView({behavior: "smooth"})`);
+	async scrollToElement(selector: string) {
+		await this.executeScript(`document.querySelector(${selector}).scrollIntoView({behavior: "smooth"})`);
 	}
 	/**
 	 * Get the number of DOM elements by CSS query
@@ -412,9 +411,8 @@ export class BetterProtractorService {
 	}
 	/**
 	 * Represents a library of canned expected conditions that are useful for protractor, especially when dealing with non-angular apps.
-	 * @returns {Promise<ProtractorExpectedConditions>}
 	 */
-	async getProtractorExpectedConditions() {
+	getProtractorExpectedConditions() {
 		return protractor.ExpectedConditions;
 	}
 	/**
@@ -655,6 +653,39 @@ export class BetterProtractorService {
 			.mouseUp()
 			.perform();
 	}
+
+	/**
+	 * @param element {ElementFinder} should contain the text to be selected
+	 */
+	async selectText(element: ElementFinder) {
+		const webElem = await element.getWebElement();
+		await browser.executeScript(function (args) {
+			if (!args) {
+				return null;
+			}
+			const range = document.createRange();
+			range.selectNode(args.firstChild);
+			const selection = window.getSelection();
+			selection.removeAllRanges();
+			selection.addRange(range);
+		}, webElem);
+	}
+
+	/**
+	 * @returns {Promise<string>} the selected text
+	 */
+	getSelectedText() {
+		return this.executeScript(function () {
+			const selection = window.getSelection();
+			const node = selection.focusNode;
+			if (!node) {
+				return null;
+			}
+			return node.nodeValue ?
+				node.nodeValue.substring(selection.baseOffset, selection.focusOffset) : node['innerText'];
+		}) as any as Promise<string>;
+	}
+
 	/**
 	 * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
 	 * @return {ProtractorBrowser}

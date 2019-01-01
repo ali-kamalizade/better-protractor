@@ -140,6 +140,7 @@ export declare class BetterProtractorService {
      * You can use this as an alternative in case pauseBrowser() does not work.
      * Use this to wait for things to initialize (e.g. animated items).
      * @param time {number} in milliseconds
+     * @returns {Promise <*>}
      */
     pauseBrowserTemporarily(time: number): any;
     /**
@@ -224,9 +225,8 @@ export declare class BetterProtractorService {
     /**
      * Smooth scroll to a DOM element
      * @param selector {string} CSS query
-     * @returns {promise.Promise<void>}
      */
-    scrollToElement(selector: string): promise.Promise<{}>;
+    scrollToElement(selector: string): Promise<void>;
     /**
      * Get the number of DOM elements by CSS query
      * @param {string} selector CSS query
@@ -260,9 +260,8 @@ export declare class BetterProtractorService {
     getElementSize(selector: string): Promise<ISize>;
     /**
      * Represents a library of canned expected conditions that are useful for protractor, especially when dealing with non-angular apps.
-     * @returns {Promise<ProtractorExpectedConditions>}
      */
-    getProtractorExpectedConditions(): Promise<ProtractorExpectedConditions>;
+    getProtractorExpectedConditions(): ProtractorExpectedConditions;
     /**
      * Take a screenshot and save it in the specified directory.
      * @param {string} filename if not provided, then the browser title + current date will be used
@@ -307,6 +306,14 @@ export declare class BetterProtractorService {
      * If you provide a WebElement, then the location will be used to calculate the offset.
      */
     dragElement(element: WebElement, target: WebElement | ILocation, waitTime?: number): Promise<void>;
+    /**
+     * @param element {ElementFinder} should contain the text to be selected
+     */
+    selectText(element: ElementFinder): Promise<void>;
+    /**
+     * @returns {Promise<string>} the selected text
+     */
+    getSelectedText(): Promise<string>;
     /**
      * Get the underlying ProtractorBrowser if you need to access the Protractor API directly.
      * @return {ProtractorBrowser}

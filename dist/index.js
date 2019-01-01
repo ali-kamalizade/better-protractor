@@ -243,6 +243,7 @@ var BetterProtractorService = /** @class */ (function () {
      * You can use this as an alternative in case pauseBrowser() does not work.
      * Use this to wait for things to initialize (e.g. animated items).
      * @param time {number} in milliseconds
+     * @returns {Promise <*>}
      */
     BetterProtractorService.prototype.pauseBrowserTemporarily = function (time) {
         return protractor_1.browser.sleep(time);
@@ -390,10 +391,18 @@ var BetterProtractorService = /** @class */ (function () {
     /**
      * Smooth scroll to a DOM element
      * @param selector {string} CSS query
-     * @returns {promise.Promise<void>}
      */
     BetterProtractorService.prototype.scrollToElement = function (selector) {
-        return protractor_1.browser.executeScript("document.querySelector(" + selector + ").scrollIntoView({behavior: \"smooth\"})");
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.executeScript("document.querySelector(" + selector + ").scrollIntoView({behavior: \"smooth\"})")];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     /**
      * Get the number of DOM elements by CSS query
@@ -490,14 +499,9 @@ var BetterProtractorService = /** @class */ (function () {
     };
     /**
      * Represents a library of canned expected conditions that are useful for protractor, especially when dealing with non-angular apps.
-     * @returns {Promise<ProtractorExpectedConditions>}
      */
     BetterProtractorService.prototype.getProtractorExpectedConditions = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, protractor_1.protractor.ExpectedConditions];
-            });
-        });
+        return protractor_1.protractor.ExpectedConditions;
     };
     /**
      * Take a screenshot and save it in the specified directory.
@@ -776,6 +780,48 @@ var BetterProtractorService = /** @class */ (function () {
                         return [2 /*return*/];
                 }
             });
+        });
+    };
+    /**
+     * @param element {ElementFinder} should contain the text to be selected
+     */
+    BetterProtractorService.prototype.selectText = function (element) {
+        return __awaiter(this, void 0, void 0, function () {
+            var webElem;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, element.getWebElement()];
+                    case 1:
+                        webElem = _a.sent();
+                        return [4 /*yield*/, protractor_1.browser.executeScript(function (args) {
+                                if (!args) {
+                                    return null;
+                                }
+                                var range = document.createRange();
+                                range.selectNode(args.firstChild);
+                                var selection = window.getSelection();
+                                selection.removeAllRanges();
+                                selection.addRange(range);
+                            }, webElem)];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /**
+     * @returns {Promise<string>} the selected text
+     */
+    BetterProtractorService.prototype.getSelectedText = function () {
+        return this.executeScript(function () {
+            var selection = window.getSelection();
+            var node = selection.focusNode;
+            if (!node) {
+                return null;
+            }
+            return node.nodeValue ?
+                node.nodeValue.substring(selection.baseOffset, selection.focusOffset) : node['innerText'];
         });
     };
     /**
